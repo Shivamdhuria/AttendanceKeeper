@@ -110,13 +110,13 @@
             android:text="Saturday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/checkbox_monday"
+            android:id="@+id/checkbox_saturday"
             android:checked="false"
             android:textColor="@android:color/white"
             android:buttonTint="@android:color/white"
             android:textSize="18sp"
             android:layout_marginStart="30dp"
-            android:layout_below="@+id/checkbox_monday"
+            android:layout_below="@+id/checkbox_saturday"
             android:layout_alignParentStart="true"
             android:layout_marginTop="145dp"
             android:layout_margin="5dp" />
@@ -131,7 +131,7 @@
             android:buttonTint="@android:color/white"
             android:textSize="18sp"
             android:layout_marginStart="30dp"
-            android:layout_below="@+id/checkbox_monday"
+            android:layout_below="@+id/checkbox_saturday"
             android:layout_alignParentStart="true"
             android:layout_margin="5dp" />
 
