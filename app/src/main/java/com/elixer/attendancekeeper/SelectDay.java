@@ -3,13 +3,14 @@ package com.elixer.attendancekeeper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.elixer.attendancekeeper.NewClass.days;
 
 public class SelectDay extends AppCompatActivity {
     protected static ArrayList<Integer> arrayList ;
@@ -20,8 +21,7 @@ public class SelectDay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_day);
-        String name = getIntent().getStringExtra("name");
-        Log.e("Class name",name);
+
         arrayList = new ArrayList<>(
                 Arrays.asList(0,0,0,0,0,0,0)
         );
@@ -67,6 +67,7 @@ public class SelectDay extends AppCompatActivity {
 
                 Intent intentSelectTime = new Intent(getApplicationContext(),SelectTime.class);
                 startActivity(intentSelectTime);
+                days = arrayList;
             }
         });
 

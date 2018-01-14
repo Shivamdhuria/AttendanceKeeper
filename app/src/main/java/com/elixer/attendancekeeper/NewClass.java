@@ -8,9 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class NewClass extends AppCompatActivity {
-    EditText editText;
+    String name;
+    static ArrayList<Integer> days;
+
+    static ArrayList<String> daysTime;
     Button button_submit;
+
+    //For activity Select Priorities
+    static Boolean reminder;
+    static Boolean alarm;
+    EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +43,7 @@ public class NewClass extends AppCompatActivity {
 
                         //Pres submit with name in intent
                         Intent intentSelectDay = new Intent(getApplicationContext(), SelectDay.class);
-                        intentSelectDay.putExtra("name", editText.getText().toString());
+                        name = editText.getText().toString();
                         startActivity(intentSelectDay);
                     }
                 }

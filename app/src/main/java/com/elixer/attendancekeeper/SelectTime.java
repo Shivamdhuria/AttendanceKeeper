@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.elixer.attendancekeeper.NewClass.daysTime;
 import static com.elixer.attendancekeeper.SelectDay.arrayList;
 
 public class SelectTime extends AppCompatActivity {
@@ -218,6 +219,7 @@ public class SelectTime extends AppCompatActivity {
                 }
 
                 Log.e("TIME",arrayListTime.toString());
+               daysTime=arrayListTime;
                 Intent intentSelectTime = new Intent(getApplication(),SelectPriorities.class);
                 startActivity(intentSelectTime);
             }
