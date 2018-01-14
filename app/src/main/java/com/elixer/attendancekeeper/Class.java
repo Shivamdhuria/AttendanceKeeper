@@ -8,19 +8,24 @@ import java.util.ArrayList;
 
 public class Class {
     public String name;
-    public ArrayList<String> days;
+    public ArrayList<Integer> days;
+    static ArrayList<String> daysTime;
+
+
+
     public boolean reminder;
     public boolean alarm;
-    public long remindTime;
 
 
-    public Class(String name, ArrayList<String> days, boolean reminder,boolean alarm, long remindTime) {
+
+    public Class(String name, ArrayList<Integer> days,ArrayList<String> daysTime, boolean reminder,boolean alarm ) {
 
         this.name = name;
         this.days = days;
+        this.daysTime=daysTime;
         this.reminder = reminder;
         this.alarm=alarm;
-        this.remindTime = remindTime;
+
 
 
     }

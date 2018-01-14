@@ -50,6 +50,7 @@ public class SetDefault extends AppCompatActivity {
                             snappydb.put("dafaultchoice","OFF");
                         }
                         Log.e("Saved","Database saved");
+                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm);
 
                         snappydb.close();
 

@@ -1,12 +1,17 @@
 package com.elixer.attendancekeeper;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.snappydb.DB;
+import com.snappydb.DBFactory;
+import com.snappydb.SnappydbException;
 
 public class CurrentAttendance extends AppCompatActivity {
     Button buttonSubmitdone;
@@ -33,6 +38,19 @@ public class CurrentAttendance extends AppCompatActivity {
                 }
 
                 else{
+
+                    try {
+                        DB snappydb = DBFactory.open(getApplicationContext(),"Attendance"); //create or open an existing database using the default name
+
+
+                        //Adding new class to database
+                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm);
+                        Log.e("new class",newclass.days.toString());
+                        snappydb.put(NewClass.name,newclass);
+                        snappydb.close();
+
+                    } catch (SnappydbException e) {
+                    }
 
                     //ONLY IF NOT SET
                     Intent intentSetDefault = new Intent(getApplicationContext(),SetDefault.class);

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class NewClass extends AppCompatActivity {
-    String name;
+    static String name;
     static ArrayList<Integer> days;
 
     static ArrayList<String> daysTime;
