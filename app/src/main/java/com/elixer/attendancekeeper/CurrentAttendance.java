@@ -1,6 +1,8 @@
 package com.elixer.attendancekeeper;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;
@@ -45,7 +48,18 @@ public class CurrentAttendance extends AppCompatActivity {
 
                         //Adding new class to database
                         Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm);
+
+                        //Creating Gson
+                        Gson gson = new Gson();
+                        String newClass = gson.toJson(newclass);
                         Log.e("new class",newclass.days.toString());
+                        //Saving objects in String gson
+                        SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("class",newClass);
+                        editor.commit();
+
+
                         snappydb.put(NewClass.name,newclass);
                         snappydb.close();
 
