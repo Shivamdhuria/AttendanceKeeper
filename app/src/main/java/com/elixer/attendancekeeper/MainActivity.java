@@ -16,8 +16,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +41,16 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
         String json = sharedPref.getString("class", "");
         Log.e("json",json);
+
+        try{
+            fetchAllPreference();
+
+        }catch (Exception ex){
+
+
+        }
+
+
 
 
 
@@ -121,5 +134,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void fetchAllPreference(){
+        SharedPreferences prefA =getApplicationContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
+        Map<String, ?> allEntries = prefA.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+           Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
+        }
     }
 }

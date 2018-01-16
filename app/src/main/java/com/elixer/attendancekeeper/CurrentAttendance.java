@@ -56,7 +56,7 @@ public class CurrentAttendance extends AppCompatActivity {
                         //Saving objects in String gson
                         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("class",newClass);
+                        editor.putString(NewClass.name,newClass);
                         editor.commit();
 
 
