@@ -43,11 +43,13 @@ public class CurrentAttendance extends AppCompatActivity {
                 else{
 
                     try {
+                        int current = Integer.parseInt(editTextCurrent.getText().toString());
+                        int total = Integer.parseInt(editTextTotal.getText().toString());
                         DB snappydb = DBFactory.open(getApplicationContext(),"Attendance"); //create or open an existing database using the default name
 
 
                         //Adding new class to database
-                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm);
+                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm,current,total);
 
                         //Creating Gson
                         Gson gson = new Gson();

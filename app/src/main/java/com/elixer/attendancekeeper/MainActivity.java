@@ -16,14 +16,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //a List of type hero for holding list items
+    List<Class> classList;
+
+    //the listview
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //initializing listview
+        //initializing objects
+        classList = new ArrayList<>();
+        listView = (ListView) findViewById(R.id.listview);
 
 
 
@@ -41,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
         String json = sharedPref.getString("class", "");
         Log.e("json",json);
-
+        //Try to fetch all values from shared preferene
         try{
             fetchAllPreference();
 
@@ -141,6 +155,16 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences prefA =getApplicationContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
         Map<String, ?> allEntries = prefA.getAll();
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+
+            //Converting from Json to Object
+            /** Use the string printed to create a new object */
+            //Creating Gson
+            Gson gson = new Gson();
+            Class classes = gson.fromJson(entry.getValue().toString(), Class.class);
+
+            /** Print one variable to the console */
+            System.out.println("Username : " + classes.getName());
+
            Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
         }
     }

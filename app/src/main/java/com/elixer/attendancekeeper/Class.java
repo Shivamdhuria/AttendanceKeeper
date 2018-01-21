@@ -16,15 +16,20 @@ public class Class {
     public boolean reminder;
     public boolean alarm;
 
+    public int current;
+    public int total;
 
 
-    public Class(String name, ArrayList<Integer> days,ArrayList<String> daysTime, boolean reminder,boolean alarm ) {
+
+    public Class(String name, ArrayList<Integer> days,ArrayList<String> daysTime, boolean reminder,boolean alarm ,int current,int total) {
 
         this.name = name;
         this.days = days;
         this.daysTime=daysTime;
         this.reminder = reminder;
         this.alarm=alarm;
+        this.current = current;
+        this.total = total;
 
 
 
@@ -32,6 +37,22 @@ public class Class {
 
     public String getName() {
         return name;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public void setName(String name) {
