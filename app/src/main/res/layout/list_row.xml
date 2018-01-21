@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/darker_gray"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_margin="15dp"
+    android:layout_marginBottom="30dp">
+
+
+
+    <!-- Title Of Song-->
+
+    <!-- Artist Name -->
+
+    <TextView
+        android:id="@+id/className"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Class Name"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/attendance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textColor="#343434"
+        android:textSize="24sp"
+
+        android:text="Attendance"
+        android:padding="5dp"
+        android:layout_below="@+id/className"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp" />
+
+    <!-- Rightend Duration -->
+
+
+</RelativeLayout>
