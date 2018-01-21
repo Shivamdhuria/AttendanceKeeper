@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //ONLY IF NOT SET
+            Intent intentSetDefault = new Intent(getApplicationContext(),SetDefault.class);
+            startActivity(intentSetDefault);
             return true;
         }
 
@@ -164,8 +167,16 @@ public class MainActivity extends AppCompatActivity
 
             /** Print one variable to the console */
             System.out.println("Username : " + classes.getName());
+            classList.add(classes);
+
 
            Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
         }
+
+        //creating the adapter
+       ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_row, classList);
+
+        //attaching adapter to the listview
+        listView.setAdapter(adapter);
     }
 }

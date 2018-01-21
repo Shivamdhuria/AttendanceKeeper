@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
-import com.snappydb.DB;
-import com.snappydb.DBFactory;
-import com.snappydb.SnappydbException;
 
 public class CurrentAttendance extends AppCompatActivity {
     Button buttonSubmitdone;
@@ -42,10 +39,10 @@ public class CurrentAttendance extends AppCompatActivity {
 
                 else{
 
-                    try {
+
                         int current = Integer.parseInt(editTextCurrent.getText().toString());
                         int total = Integer.parseInt(editTextTotal.getText().toString());
-                        DB snappydb = DBFactory.open(getApplicationContext(),"Attendance"); //create or open an existing database using the default name
+                       // DB snappydb = DBFactory.open(getApplicationContext(),"Attendance"); //create or open an existing database using the default name
 
 
                         //Adding new class to database
@@ -61,16 +58,16 @@ public class CurrentAttendance extends AppCompatActivity {
                         editor.putString(NewClass.name,newClass);
                         editor.commit();
 
-
-                        snappydb.put(NewClass.name,newclass);
-                        snappydb.close();
-
-                    } catch (SnappydbException e) {
-                    }
-
                     //ONLY IF NOT SET
-                    Intent intentSetDefault = new Intent(getApplicationContext(),SetDefault.class);
+                    Intent intentSetDefault = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intentSetDefault);
+
+
+
+
+
+
+
 
                 }
 

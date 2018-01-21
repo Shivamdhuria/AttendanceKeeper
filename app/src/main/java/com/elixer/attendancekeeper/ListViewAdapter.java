@@ -57,7 +57,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         //adding values to the list item
       //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
-        textViewCurrent.setText(classes.getCurrent());
+        textViewCurrent.setText(Integer.toString(classes.getCurrent()));
 
 
         return view;
