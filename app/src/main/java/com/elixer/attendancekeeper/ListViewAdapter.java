@@ -25,6 +25,9 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     //the layout resource file for the list items
     int resource;
 
+    TextView textActivity2;
+
+
     //constructor initializing the values
     public ListViewAdapter(Context context, int resource, List<Class> classList) {
         super(context, resource, classList);
@@ -40,6 +43,9 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         //we need to get the view of the xml for our list item
         //And for this we need a layoutinflater
+
+
+
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         //getting the view
@@ -49,7 +55,16 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
        // ImageView imageView = view.findViewById(R.id.imageView);
         TextView textViewName = view.findViewById(R.id.className);
         TextView textViewCurrent = view.findViewById(R.id.attendance);
+        TextView textViewTotal  = view.findViewById(R.id.attendancetotal);
       //  Button buttonDelete = view.findViewById(R.id.buttonDelete);
+
+
+
+
+      //  final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
+      //  final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
+
+
 
         //getting the hero of the specified position
        Class classes = classList.get(position);
@@ -58,12 +73,13 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
       //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
         textViewCurrent.setText(Integer.toString(classes.getCurrent()));
+        textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+
+
 
 
         return view;
     }
-
-
 
 
 
