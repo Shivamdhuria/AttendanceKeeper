@@ -18,10 +18,18 @@ public class Class {
 
     public int current;
     public int total;
+    public Boolean status;
 
 
+    public Boolean getStatus() {
+        return status;
+    }
 
-    public Class(String name, ArrayList<Integer> days,ArrayList<String> daysTime, boolean reminder,boolean alarm ,int current,int total) {
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Class(String name, ArrayList<Integer> days, ArrayList<String> daysTime, boolean reminder, boolean alarm , int current, int total, Boolean status) {
 
         this.name = name;
         this.days = days;
@@ -30,6 +38,8 @@ public class Class {
         this.alarm=alarm;
         this.current = current;
         this.total = total;
+
+        this.status = status;
 
 
 

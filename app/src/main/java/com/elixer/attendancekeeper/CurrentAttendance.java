@@ -46,7 +46,7 @@ public class CurrentAttendance extends AppCompatActivity {
 
 
                         //Adding new class to database
-                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm,current,total);
+                        Class newclass = new Class(NewClass.name,NewClass.days,NewClass.daysTime,NewClass.reminder,NewClass.alarm,current,total,true);
 
                         //Creating Gson
                         Gson gson = new Gson();

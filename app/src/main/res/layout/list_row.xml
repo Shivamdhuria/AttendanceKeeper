@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/custom_shape"
     android:orientation="horizontal"
-    android:padding="20dp"
+    android:padding="10dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:layout_margin="15dp"
@@ -73,14 +73,37 @@
         android:layout_alignBottom="@+id/attendance"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:text="Present"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_present"
+        android:layout_below="@+id/attendance"
+        android:layout_toStartOf="@+id/button_absent" />
+
+    <Button
+        android:text="Absent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_absent"
+        android:layout_alignBaseline="@+id/button_present"
+        android:layout_alignBottom="@+id/button_present"
+        android:layout_alignParentEnd="true" />
+
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewPercentage"
-        android:layout_marginEnd="41dp"
-        android:layout_below="@+id/dynamicArcView"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/attendancetotal"
+        android:layout_toEndOf="@+id/button_present" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/status" />
     <!-- Rightend Duration -->
 
 

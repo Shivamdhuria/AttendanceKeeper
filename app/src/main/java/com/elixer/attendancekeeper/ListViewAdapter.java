@@ -1,13 +1,19 @@
 package com.elixer.attendancekeeper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -26,6 +32,8 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     int resource;
 
     TextView textActivity2;
+    Boolean check;
+    Class classes;
 
 
     //constructor initializing the values
@@ -53,10 +61,15 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         //getting the view elements of the list from the view
        // ImageView imageView = view.findViewById(R.id.imageView);
+        Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         TextView textViewCurrent = view.findViewById(R.id.attendance);
         TextView textViewTotal  = view.findViewById(R.id.attendancetotal);
+        Button buttonAbsent = view.findViewById(R.id.button_absent);
+        Button buttonPresent = view.findViewById(R.id.button_present);
       //  Button buttonDelete = view.findViewById(R.id.buttonDelete);
+
+
 
 
 
@@ -67,20 +80,62 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
         //getting the hero of the specified position
-       Class classes = classList.get(position);
+       classes = classList.get(position);
 
         //adding values to the list item
       //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
         textViewCurrent.setText(Integer.toString(classes.getCurrent()));
         textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        check = classes.getStatus();
+      //  Log.d("check from data",check.toString());
+            status.setChecked(check);
+
+        //If switch clicked
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                classes=classList.get(position);
+                check = classes.getStatus();
+                Log.d(classes.getName().toString()+" check from data ",check.toString());
+
+
+                if (check) {
+                    check = false;
+                } else {
+                    check = true;
+                }
+                classes.setStatus(check);
+                saveinsharedpref(classes);
+                Log.d(classes.getName().toString()+" checkto loop",check.toString());
+            }
+
+            private void saveinsharedpref(Class newclass) {
+
+
+
+                Gson gson = new Gson();
+                String newClass = gson.toJson(classes);
+                SharedPreferences sharedPref =getContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(newclass.name,newClass);
+                editor.commit();
+            }
+        });
+
+        buttonAbsent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
 
 
 
         return view;
     }
-
 
 
 
