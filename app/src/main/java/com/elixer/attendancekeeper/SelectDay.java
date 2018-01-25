@@ -13,7 +13,7 @@ import java.util.Arrays;
 import static com.elixer.attendancekeeper.NewClass.days;
 
 public class SelectDay extends AppCompatActivity {
-    protected static ArrayList<Integer> arrayList ;
+    protected static ArrayList<String> arrayList ;
     CheckBox monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     Button button_submit;
 
@@ -23,7 +23,7 @@ public class SelectDay extends AppCompatActivity {
         setContentView(R.layout.activity_select_day);
 
         arrayList = new ArrayList<>(
-                Arrays.asList(0,0,0,0,0,0,0)
+                Arrays.asList("null","null","null","null","null","null","null")
         );
 
         monday = (CheckBox)findViewById(R.id.checkbox_monday);
@@ -40,29 +40,29 @@ public class SelectDay extends AppCompatActivity {
             public void onClick(View view) {
 
                 arrayList = new ArrayList<>(
-                        Arrays.asList(0,0,0,0,0,0,0)
+                        Arrays.asList("null","null","null","null","null","null","null")
                 );
 
                 if(monday.isChecked()){
-                    arrayList.set(0, 1);
+                    arrayList.set(0, "Mon");
                 }
                 if(tuesday.isChecked()){
-                    arrayList.set(1, 1);
+                    arrayList.set(1, "Tue");
                 }
                 if(wednesday.isChecked()){
-                    arrayList.set(2, 1);
+                    arrayList.set(2, "Wed");
                 }
                 if(thursday.isChecked()){
-                    arrayList.set(3, 1);
+                    arrayList.set(3, "Thu");
                 }
                 if(friday.isChecked()){
-                    arrayList.set(4, 1);
+                    arrayList.set(4, "Fri");
                 }
                 if(saturday.isChecked()){
-                    arrayList.set(5, 1);
+                    arrayList.set(5,"Sat");
                 }
                 if(sunday.isChecked()){
-                    arrayList.set(6, 1);
+                    arrayList.set(6, "Sun");
                 }
 
                 Intent intentSelectTime = new Intent(getApplicationContext(),SelectTime.class);

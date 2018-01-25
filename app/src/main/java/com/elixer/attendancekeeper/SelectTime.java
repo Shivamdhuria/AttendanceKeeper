@@ -71,7 +71,7 @@ public class SelectTime extends AppCompatActivity {
 
             //if default time isn't set
 
-            if (arrayList.get(i) == 0) {
+            if (arrayList.get(i).equals("null")) {
                 //For MONDAY
                 if (i == 0) {
                     textViewMonday.setVisibility(View.INVISIBLE);
@@ -159,7 +159,7 @@ public class SelectTime extends AppCompatActivity {
                 for (int i = 0; i < 7; i++) {
                     //if default time is set
                     if (checkbox.isChecked()) {
-                        if (arrayList.get(i) == 1) {
+                        if (!arrayList.get(i) .equals("null")) {
 
                             arrayListTime.set(i, defaultTime.getText().toString());
 
@@ -168,7 +168,7 @@ public class SelectTime extends AppCompatActivity {
                     } else {
                         //if default time isn't set
 
-                            if (arrayList.get(i) == 1) {
+                            if (!arrayList.get(i).equals("null")) {
                                 //For MONDAY
                                 if (i == 0) {
                                     Log.d("MONday",mondayTime.getText().toString());

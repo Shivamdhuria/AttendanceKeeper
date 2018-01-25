@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Class {
     public String name;
-    public ArrayList<Integer> days;
+    public ArrayList<String> days;
     static ArrayList<String> daysTime;
 
 
@@ -29,7 +29,7 @@ public class Class {
         this.status = status;
     }
 
-    public Class(String name, ArrayList<Integer> days, ArrayList<String> daysTime, boolean reminder, boolean alarm , int current, int total, Boolean status) {
+    public Class(String name, ArrayList<String> days, ArrayList<String> daysTime, boolean reminder, boolean alarm , int current, int total, Boolean status) {
 
         this.name = name;
         this.days = days;
@@ -69,11 +69,11 @@ public class Class {
         this.name = name;
     }
 
-    public ArrayList<Integer> getDays() {
+    public ArrayList<String> getDays() {
         return days;
     }
 
-    public void setDays(ArrayList<Integer> days) {
+    public void setDays(ArrayList<String> days) {
         this.days = days;
     }
 

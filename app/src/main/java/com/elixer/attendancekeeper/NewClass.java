@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class NewClass extends AppCompatActivity {
     static String name;
-    static ArrayList<Integer> days;
+    static ArrayList<String> days;
 
     static ArrayList<String> daysTime;
     Button button_submit;

@@ -15,7 +15,11 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Admin on 1/22/2018.
@@ -34,6 +38,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     TextView textActivity2;
     Boolean check;
     Class classes;
+    TextView textViewCurrent,textViewTotal;
 
 
     //constructor initializing the values
@@ -63,11 +68,12 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
        // ImageView imageView = view.findViewById(R.id.imageView);
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
-        TextView textViewCurrent = view.findViewById(R.id.attendance);
-        TextView textViewTotal  = view.findViewById(R.id.attendancetotal);
+        textViewCurrent = view.findViewById(R.id.attendance);
+        textViewTotal  = view.findViewById(R.id.attendancetotal);
         Button buttonAbsent = view.findViewById(R.id.button_absent);
         Button buttonPresent = view.findViewById(R.id.button_present);
-      //  Button buttonDelete = view.findViewById(R.id.buttonDelete);
+        Button buttonOff = view.findViewById(R.id.button_off);
+        String today = getDate();
 
 
 
@@ -87,17 +93,71 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         textViewName.setText(classes.getName());
         textViewCurrent.setText(Integer.toString(classes.getCurrent()));
         textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
-        check = classes.getStatus();
-      //  Log.d("check from data",check.toString());
+
+        try {
+            check = classes.getStatus();
+            //  Log.d("check from data",check.toString());
             status.setChecked(check);
+        }catch (Exception er){
+            er.printStackTrace();
+        }
+
+        //Making buttons disappear if today string not found
+        Boolean found =searchDay(today);
+        Log.e("BOOOLEAN",found.toString());
+        if(found){
+            Log.e("INVI","INVIIIII");
+            buttonAbsent.setVisibility(View.INVISIBLE);
+        }
+
+
+        //Buttons initialised here
+        buttonPresent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                classes=classList.get(position);
+                int current = classes.getCurrent();
+                int total = classes.getTotal();
+                current = current+1;
+                total=total+1;
+                classes.setCurrent(current);
+                classes.setTotal(total);
+                saveinsharedpref(classes);
+            }
+        });
+
+        buttonAbsent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                classes=classList.get(position);
+                int current = classes.getCurrent();
+                int total = classes.getTotal();
+               // current = current+1;
+                total=total+1;
+               // classes.setCurrent(current);
+                classes.setTotal(total);
+                saveinsharedpref(classes);
+            }
+        });
+
+        buttonOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                classes=classList.get(position);
+                int current = classes.getCurrent();
+                int total = classes.getTotal();
+
+                saveinsharedpref(classes);
+            }
+        });
 
         //If switch clicked
         status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                classes=classList.get(position);
+                classes = classList.get(position);
                 check = classes.getStatus();
-                Log.d(classes.getName().toString()+" check from data ",check.toString());
+                Log.d(classes.getName().toString() + " check from data ", check.toString());
 
 
                 if (check) {
@@ -107,7 +167,8 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 }
                 classes.setStatus(check);
                 saveinsharedpref(classes);
-                Log.d(classes.getName().toString()+" checkto loop",check.toString());
+                Log.d(classes.getName().toString() + " checkto loop", check.toString());
+
             }
 
             private void saveinsharedpref(Class newclass) {
@@ -123,12 +184,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             }
         });
 
-        buttonAbsent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
 
 
@@ -137,6 +193,41 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         return view;
     }
 
+    private Boolean searchDay(String today) {
+        Boolean val=false;
+        //Load the list into a hashSet
+        Set<String> set = new HashSet<String>(classes.getDays());
+        if (set.contains(today))
+        {
+            Log.e("BOOOLEAN","FOUND");
+            val = true;
+        }
+        return val;
+    }
 
+    private String getDate() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        Log.e("dayyyy",dayOfTheWeek);
+        return dayOfTheWeek;
+    }
+
+    private void saveinsharedpref(Class newclass) {
+
+
+
+        Gson gson = new Gson();
+        String newClass = gson.toJson(classes);
+        SharedPreferences sharedPref =getContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(newclass.name,newClass);
+        //update in listview
+        editor.commit();
+       // textViewCurrent.setText(Integer.toString(classes.getCurrent()));
+       // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        notifyDataSetChanged();
+    }
 
 }
