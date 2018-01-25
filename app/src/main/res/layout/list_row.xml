@@ -79,7 +79,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_present"
         android:layout_below="@+id/attendance"
-        android:layout_toStartOf="@+id/button_absent" />
+        android:layout_toStartOf="@+id/button_absent"
+        android:visibility="invisible" />
 
     <Button
         android:text="Absent"
@@ -88,7 +89,8 @@
         android:id="@+id/button_absent"
         android:layout_alignBaseline="@+id/button_present"
         android:layout_alignBottom="@+id/button_present"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
 
     <TextView
         android:text="TextView"
@@ -112,7 +114,8 @@
         android:id="@+id/button_off"
         android:layout_alignBaseline="@+id/button_present"
         android:layout_alignBottom="@+id/button_present"
-        android:layout_toStartOf="@+id/button_present" />
+        android:layout_toStartOf="@+id/button_present"
+        android:visibility="invisible" />
     <!-- Rightend Duration -->
 
 

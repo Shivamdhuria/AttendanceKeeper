@@ -107,7 +107,9 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Log.e("BOOOLEAN",found.toString());
         if(found){
             Log.e("INVI","INVIIIII");
-            buttonAbsent.setVisibility(View.INVISIBLE);
+            buttonAbsent.setVisibility(View.VISIBLE);
+            buttonPresent.setVisibility(View.VISIBLE);
+            buttonOff.setVisibility(View.VISIBLE);
         }
 
 
