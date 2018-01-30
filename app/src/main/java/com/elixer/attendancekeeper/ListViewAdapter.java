@@ -1,6 +1,9 @@
 package com.elixer.attendancekeeper;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +15,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static android.content.Context.ALARM_SERVICE;
 
 /**
  * Created by Admin on 1/22/2018.
@@ -102,7 +109,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             er.printStackTrace();
         }
 
-        //Making buttons disappear if today string not found
+        //Making buttons appear if today string not found and setting up notifacations and alars
         Boolean found =searchDay(today);
         Log.e("BOOOLEAN",found.toString());
         if(found){
@@ -110,6 +117,10 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             buttonAbsent.setVisibility(View.VISIBLE);
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
+
+            //setting  notifications
+            setAlarm();
+
         }
 
 
@@ -193,6 +204,31 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
         return view;
+    }
+
+    private void setAlarm() {
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 2);
+        calendar.set(Calendar.MINUTE, 26);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
+       // Log.e("Setting Alarm",calendar.toString());
+
+//This is alarm manager
+      //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        //calendar.setTimeInMillis(time);
+      //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getContext(), 0, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+                + (20 * 1000), pendingIntent);
+        Toast.makeText(getContext(),"Alarm sent",Toast.LENGTH_SHORT).show();
     }
 
     private Boolean searchDay(String today) {

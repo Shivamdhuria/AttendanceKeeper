@@ -1,5 +1,7 @@
 package com.elixer.attendancekeeper;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +48,14 @@ public class MainActivity extends AppCompatActivity
         //initializing objects
         classList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listview);
+
+        //Set alarm for date change on create
+        setAlarmForDate();
+
+
+
+
+
 
 
 
@@ -91,6 +102,20 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setAlarmForDate() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 2);
+        calendar.set(Calendar.MINUTE, 26);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intentService = new Intent(this,Run.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0000, intentService, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (10*1000), pendingIntent);
+        Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
     }
 
     @Override
