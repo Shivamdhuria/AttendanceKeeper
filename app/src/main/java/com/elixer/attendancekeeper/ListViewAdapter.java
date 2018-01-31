@@ -175,14 +175,17 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
                 if (check) {
                     check = false;
+                    cancelReminder(classes.getName());
                 } else {
                     check = true;
                 }
                 classes.setStatus(check);
+
                 saveinsharedpref(classes);
+
              //   Log.d(classes.getName().toString() + " checkto loop", check.toString());
             //    Intent intentService = new Intent(context,Run.class);
-                startRun(context);
+              //  startRun(context);
 
 
             }
@@ -207,6 +210,19 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
         return view;
+    }
+
+    private void cancelReminder(String name) {
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+        int hashcode = name.hashCode();
+        Log.e("Cancell, Alarm","cancelling....."+ name+ String.valueOf(hashcode));
+        //Intent myIntent = new Intent(getContext(),NotificationPublisher.class);
+        Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent.cancel();
+
+        alarmManager.cancel(pendingIntent);
     }
 
     private void setAlarm() {
@@ -275,5 +291,6 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Intent intentService = new Intent(context,Run.class);
         context.startService(intentService);
     }
+
 
 }

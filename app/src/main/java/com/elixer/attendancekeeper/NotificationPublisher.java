@@ -19,7 +19,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         showNotification(context);
-        Log.e("show Notification","show Notification");
+     //   Log.e("show Notification","show Notification");
        // Toast.makeText(getContext(),"Alarm sent",Toast.LENGTH_SHORT).show();
     }
 

@@ -119,7 +119,7 @@ public class Run extends IntentService {
         //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         int hashcode = className.hashCode();
-        Log.e("unique id from string", String.valueOf( hashcode));//1843668795
+        Log.e("unique id from string", String.valueOf(hashcode));//1843668795
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this,hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
