@@ -52,16 +52,6 @@ public class MainActivity extends AppCompatActivity
         //Set alarm for date change on create
         setAlarmForDate();
 
-
-
-
-
-
-
-
-
-
-
         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPref.getString("class", "");

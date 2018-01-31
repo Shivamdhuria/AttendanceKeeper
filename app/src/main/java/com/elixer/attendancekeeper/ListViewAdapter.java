@@ -111,15 +111,15 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         //Making buttons appear if today string not found and setting up notifacations and alars
         Boolean found =searchDay(today);
-        Log.e("BOOOLEAN",found.toString());
+     //   Log.e("BOOOLEAN",found.toString());
         if(found){
-            Log.e("INVI","INVIIIII");
+         //   Log.e("INVI","INVIIIII");
             buttonAbsent.setVisibility(View.VISIBLE);
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
 
             //setting  notifications
-            setAlarm();
+          //  setAlarm();
 
         }
 
@@ -180,7 +180,10 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 }
                 classes.setStatus(check);
                 saveinsharedpref(classes);
-                Log.d(classes.getName().toString() + " checkto loop", check.toString());
+             //   Log.d(classes.getName().toString() + " checkto loop", check.toString());
+            //    Intent intentService = new Intent(context,Run.class);
+                startRun(context);
+
 
             }
 
@@ -266,6 +269,11 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
        // textViewCurrent.setText(Integer.toString(classes.getCurrent()));
        // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         notifyDataSetChanged();
+    }
+
+    private void startRun(Context context){
+        Intent intentService = new Intent(context,Run.class);
+        context.startService(intentService);
     }
 
 }
