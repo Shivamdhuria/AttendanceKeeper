@@ -135,6 +135,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 total=total+1;
                 classes.setCurrent(current);
                 classes.setTotal(total);
+                cancelReminder(classes.getName());
                 saveinsharedpref(classes);
             }
         });
@@ -149,6 +150,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 total=total+1;
                // classes.setCurrent(current);
                 classes.setTotal(total);
+                cancelReminder(classes.getName());
                 saveinsharedpref(classes);
             }
         });
@@ -159,6 +161,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 classes=classList.get(position);
                 int current = classes.getCurrent();
                 int total = classes.getTotal();
+                cancelReminder(classes.getName());
 
                 saveinsharedpref(classes);
             }
@@ -178,6 +181,10 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                     cancelReminder(classes.getName());
                 } else {
                     check = true;
+                    //Runing service again
+                        Intent intentService = new Intent(context,Run.class);
+                        context.startService(intentService);
+
                 }
                 classes.setStatus(check);
 
