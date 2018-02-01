@@ -38,7 +38,15 @@
             android:name=".NotificationPublisher"
             android:enabled="true" />
 
-        <service android:name=".Run" android:enabled="true" />
+        <service
+            android:name=".Run"
+            android:enabled="true" />
+
+        <activity
+            android:name=".AllClass"
+            android:label="@string/title_activity_all_class"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ClassDescriptionAndSettings"></activity>
     </application>
 
 </manifest>
