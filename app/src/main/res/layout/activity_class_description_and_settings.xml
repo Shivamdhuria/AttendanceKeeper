@@ -11,113 +11,152 @@
     tools:context="com.elixer.attendancekeeper.ClassDescriptionAndSettings"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:text="Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:id="@+id/className"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="36sp"
-        android:fontFamily="monospace"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/className"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp" />
-
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentStart="true">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextCurrent"
-            android:layout_alignBaseline="@+id/textView5"
-            android:layout_alignBottom="@+id/textView5"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="185dp"
-            android:text="0"
-            android:textAlignment="center"
-            android:textColor="@android:color/white" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
 
         <TextView
-            android:text="Current Attandance"
+            android:text="Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView5"
-            android:textSize="18sp"
-            android:textColor="@android:color/background_light"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="12dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:text="Total Classes"
-            android:layout_width="179dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView6"
-            android:textSize="18sp"
-            android:textColor="@android:color/background_light"
-            android:layout_alignBaseline="@+id/editTextCurrent"
-            android:layout_alignBottom="@+id/editTextCurrent"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextTotal"
-            android:text="0"
+            android:layout_marginTop="27dp"
+            android:id="@+id/className"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:layout_alignBaseline="@+id/textView6"
-            android:layout_alignBottom="@+id/textView6"
-            android:layout_toEndOf="@+id/textView6"
-            android:layout_marginStart="11dp" />
+            android:textSize="36sp"
+            android:fontFamily="monospace"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
 
-    </RelativeLayout>
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/className"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp" />
 
-    <Button
-        android:text="Update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_update"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/textView11"
-        android:layout_marginBottom="81dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView11"
+            android:layout_alignParentStart="true">
 
-    <Button
-        android:text="Advanced Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/button_advanced_settings"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextCurrent"
+                android:layout_alignBaseline="@+id/textView5"
+                android:layout_alignBottom="@+id/textView5"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="185dp"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:text="Current Attandance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:textSize="18sp"
+                android:textColor="@android:color/background_light"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:text="Total Classes"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:textSize="18sp"
+                android:textColor="@android:color/background_light"
+                android:layout_alignBaseline="@+id/editTextCurrent"
+                android:layout_alignBottom="@+id/editTextCurrent"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextTotal"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_alignBaseline="@+id/textView6"
+                android:layout_alignBottom="@+id/textView6"
+                android:layout_toEndOf="@+id/textView6"
+                android:layout_marginStart="11dp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:text="Update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_update"
+            android:layout_below="@+id/editTextTotal"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="7dp" />
+
+        <CheckBox
+            android:text="Set alarm for classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textColor="@android:color/white"
+            android:buttonTint="@android:color/white"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/check_box_alarm"
+            android:layout_marginTop="29dp"
+            android:layout_below="@+id/check_box_reminder"
+            android:layout_alignStart="@+id/check_box_reminder"
+            android:layout_alignEnd="@+id/check_box_reminder" />
+
+        <CheckBox
+            android:text="Set Reminder for Class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textColor="@android:color/white"
+            android:buttonTint="@android:color/white"
+            android:textSize="20sp"
+            android:layout_weight="0.00"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/check_box_reminder"
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button_advanced_settings"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
 
 </RelativeLayout>

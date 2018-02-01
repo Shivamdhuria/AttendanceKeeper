@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +27,13 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
     TextView textViewClassName;
     String className;
     EditText edittextCurrent,edittextTotal;
-    Button buttonUpdate;
+    Button buttonUpdate,buttonAdvanced;
     Class classes;
+    ScrollView scrollView;
+    CheckBox checkboxAlarm,checkboxReminder;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_description_and_settings);
 
@@ -40,7 +44,10 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         edittextCurrent = (EditText)findViewById(R.id.editTextCurrent);
         edittextTotal=(EditText)findViewById(R.id.editTextTotal);
         buttonUpdate = (Button)findViewById(R.id.button_update);
-
+        buttonAdvanced = (Button)findViewById(R.id.button_advanced_settings);
+        checkboxAlarm=(CheckBox)findViewById(R.id.check_box_alarm);
+        checkboxReminder=(CheckBox)findViewById(R.id.check_box_reminder);
+        //scrollView = (ScrollView)findViewById(R.id.scrollview);
 
         textViewClassName.setText(className);
         getClassByName(className);
@@ -56,6 +63,19 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
                 //startActivity(intentMainActivity);
                 //Update the Percentage
 
+            }
+        });
+        buttonAdvanced.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAdvanced = new Intent(getApplicationContext(),MainActivity.class);
+
+               // scrollView.fullScroll(View.FOCUS_DOWN);
+                classes.setAlarm(checkboxAlarm.isChecked());
+                classes.setReminder(checkboxReminder.isChecked());
+                saveinsharedpref(classes);
+                startActivity(intentAdvanced);
+                finish();
             }
         });
 
@@ -75,6 +95,8 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
                 classes = gson.fromJson(classGson.toString(), Class.class);
                 edittextTotal.setText(Integer.toString(classes.getTotal()));
                 edittextCurrent.setText(Integer.toString(classes.getCurrent()));
+                checkboxReminder.setChecked(classes.isReminder());
+                checkboxAlarm.setChecked(classes.isAlarm());
     }
 
     private void saveinsharedpref(Class newclass) {

@@ -61,6 +61,7 @@ public class CurrentAttendance extends AppCompatActivity {
                     //ONLY IF NOT SET
                     Intent intentSetDefault = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intentSetDefault);
+                    finish();
 
 
 

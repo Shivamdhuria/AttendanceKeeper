@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         PendingIntent pendingIntent = PendingIntent.getService(this, 0000, intentService, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (10*1000), pendingIntent);
-        Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -184,11 +183,11 @@ public class MainActivity extends AppCompatActivity
             Class classes = gson.fromJson(entry.getValue().toString(), Class.class);
 
             /** Print one variable to the console */
-            System.out.println("Username : " + classes.getName());
+           // System.out.println("Username : " + classes.getName());
             classList.add(classes);
 
 
-           Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
+           //Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
         }
 
         //creating the adapter
