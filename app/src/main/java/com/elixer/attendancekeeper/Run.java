@@ -39,11 +39,28 @@ public class Run extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         // This describes what will happen when service is triggered
-        Log.e("Run","Runnnn");
+        Log.e("Service Running","To set alarms/Reminder for individual");
 
 
         fetchAllPreference();
+        setUpAlarmForNextDay();
 
+    }
+
+    private void setUpAlarmForNextDay() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE,Calendar.DATE+1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 5);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intentService = new Intent(this,Run.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0000, intentService, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
+        //Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
+        Log.e("Alarm sice to run again","Alarm Manager for Service at 0.05  " + calendar.get(Calendar.DAY_OF_WEEK));
     }
 
     private Boolean searchDay(Class classes,String today) {
@@ -53,7 +70,7 @@ public class Run extends IntentService {
         Set<String> set = new HashSet<String>(classes.getDays());
         if (set.contains(today))
         {
-            Log.e("BOOOLEAN","FOUND");
+            //Log.e("BOOOLEAN","FOUND");
             val = true;
         }
         return val;
@@ -88,10 +105,10 @@ public class Run extends IntentService {
             String today=getDate();
             Boolean found =searchDay(classes,today);
             classList.add(classes);
-            Log.e("BOOOLEAN",found.toString());
+         //   Log.e("BOOOLEAN",found.toString());
             if(found && classes.getStatus() && classes.isReminder()){
                 //Same day as Today,Set alarm here
-                Log.e("Setting Alarm.",".............");
+                Log.e("Setting Alarm for class",classes.getName());
                 setAlarm(classes.getName());
 
             }
@@ -111,7 +128,7 @@ public class Run extends IntentService {
         calendar.set(Calendar.SECOND, 0);
 
         Intent notificationMessage = new Intent(this,NotificationPublisher.class);
-         Log.e("Setting Alarm.",".............");
+         //Log.e("Setting Alarm.",".............");
 
 //This is alarm manager
         //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
         //Try to fetch all values from shared preferene
         try{
             fetchAllPreference();
+            BeginService();
 
         }catch (Exception ex){
 
@@ -93,18 +94,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void BeginService() {
+        Intent serviceRun=new Intent(this,Run.class);
+        startService(serviceRun);
+    }
+
     private void setAlarmForDate() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 2);
-        calendar.set(Calendar.MINUTE, 26);
+        calendar.set(Calendar.DATE,Calendar.DATE+1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 5);
         calendar.set(Calendar.SECOND, 0);
 
         Intent intentService = new Intent(this,Run.class);
         PendingIntent pendingIntent = PendingIntent.getService(this, 0000, intentService, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (10*1000), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
         //Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
+        Log.e("Alarm for service","Alarm Manager for Service at 0.05  " + calendar.get(Calendar.DAY_OF_WEEK));
     }
 
     @Override

@@ -263,7 +263,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Set<String> set = new HashSet<String>(classes.getDays());
         if (set.contains(today))
         {
-            Log.e("BOOOLEAN","FOUND");
+           // Log.e("BOOOLEAN","FOUND");
             val = true;
         }
         return val;
@@ -274,7 +274,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE");
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
-        Log.e("dayyyy",dayOfTheWeek);
+      //  Log.e("dayyyy",dayOfTheWeek);
         return dayOfTheWeek;
     }
 
