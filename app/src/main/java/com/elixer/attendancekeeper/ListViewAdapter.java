@@ -81,7 +81,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
-        textViewTotal  = view.findViewById(R.id.attendancetotal);
+        //textViewTotal  = view.findViewById(R.id.attendancetotal);
         DecoView arcView = (DecoView)view.findViewById(R.id.dynamicArcView);
         Button buttonAbsent = view.findViewById(R.id.button_absent);
         Button buttonPresent = view.findViewById(R.id.button_present);
@@ -104,8 +104,8 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         //adding values to the list item
       //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
-        textViewCurrent.setText(Integer.toString(classes.getCurrent()));
-        textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        textViewCurrent.setText(" " +Integer.toString(classes.getCurrent())+"/"+Integer.toString(classes.getTotal()));
+      //  textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         // Create background track
         //
         //
@@ -114,18 +114,27 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
          float percentage = (classes.getCurrent()*100)/classes.getTotal();
 
         arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+
+
                 .setRange(0, 100, 100)
+
                 .setInitialVisibility(false)
                 .setLineWidth(20f)
                 .build());
-        SeriesItem seriesItem1;
+
+
+     //   int backIndex = srcView.addSeries(seriesItem);
+        final SeriesItem seriesItem1;
+
 
 
         if(percentage>75.00){
             //Create data series track
             seriesItem1 = new SeriesItem.Builder(Color.argb(255, 79, 196, 0))
-                    .setRange(0, 100, 75)
+
+                    .setRange(0, 100, 0)
                     .setLineWidth(14f)
+                    .setSpinDuration(800)
                     .build();
 
 
@@ -133,8 +142,10 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
                    seriesItem1 = new SeriesItem.Builder(Color.RED)
+
                             .setRange(0, 100, 0)
                             .setLineWidth(14f)
+                           .setSpinDuration(800)
                             .build();
         }
 
@@ -151,10 +162,26 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         arcView.addEvent(new DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
                 .setDelay(0)
-                .setDuration(1000)
+                .setDuration(200)
                 .build());
 
         arcView.addEvent(new DecoEvent.Builder(percentage).setIndex(series1Index).setDelay(3).build());
+
+
+        //Textview
+        final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
+        seriesItem1.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
+            @Override
+            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
+                float percentFilled = ((currentPosition - seriesItem1.getMinValue()) / (seriesItem1.getMaxValue() - seriesItem1.getMinValue()));
+                textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
+            }
+
+            @Override
+            public void onSeriesItemDisplayProgress(float percentComplete) {
+
+            }
+        });
         //arcView.addEvent(new DecoEvent.Builder(percentage).setIndex(seriesIndex2).setDelay(10).build());
 
         try {
