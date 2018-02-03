@@ -81,6 +81,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
+    <!-- Rightend Duration -->
+
+    <com.hookedonplay.decoviewlib.DecoView
+        android:id="@+id/dynamicArcView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/status"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/attendancetotal" />
+
     <Button
         android:text="Present"
 
@@ -90,13 +100,12 @@
         android:visibility="visible"
         android:theme="@style/PrimaryFlatButton"
 
-        android:layout_below="@+id/attendancetotal"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="18dp"
         android:textSize="14sp"
         android:padding="0dp"
         android:background="@android:color/white"
-        android:textColor="@color/colorAccentOpposite" />
+        android:textColor="@color/colorAccentOpposite"
+        android:layout_below="@+id/dynamicArcView"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="Off"
@@ -106,20 +115,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_off"
         android:visibility="visible"
-        android:layout_alignBaseline="@+id/button_absent"
-        android:layout_alignBottom="@+id/button_absent"
-        android:layout_toStartOf="@+id/button_absent"
         android:textSize="14sp"
         android:background="@android:color/white"
-        android:textColor="?android:attr/textColorTertiary" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewPercentage"
-        android:layout_alignTop="@+id/textView10"
-        android:layout_alignParentEnd="true" />
+        android:textColor="?android:attr/textColorTertiary"
+        android:layout_alignBaseline="@+id/button_absent"
+        android:layout_alignBottom="@+id/button_absent"
+        android:layout_toStartOf="@+id/dynamicArcView" />
 
     <Button
         android:text="Absent"
@@ -135,9 +136,6 @@
         android:layout_alignBaseline="@+id/button_present"
         android:layout_alignBottom="@+id/button_present"
         android:layout_toStartOf="@+id/button_present" />
-
-    <!-- Rightend Duration -->
-
 
 
 </RelativeLayout>

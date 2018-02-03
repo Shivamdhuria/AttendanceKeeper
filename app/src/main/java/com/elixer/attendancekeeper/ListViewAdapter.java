@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +50,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     Boolean check;
     Class classes;
     TextView textViewCurrent,textViewTotal;
+    DecoView arcView;
 
 
     //constructor initializing the values
@@ -77,6 +82,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
         textViewTotal  = view.findViewById(R.id.attendancetotal);
+        DecoView arcView = (DecoView)view.findViewById(R.id.dynamicArcView);
         Button buttonAbsent = view.findViewById(R.id.button_absent);
         Button buttonPresent = view.findViewById(R.id.button_present);
         Button buttonOff = view.findViewById(R.id.button_off);
@@ -100,6 +106,56 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         textViewName.setText(classes.getName());
         textViewCurrent.setText(Integer.toString(classes.getCurrent()));
         textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        // Create background track
+        //
+        //
+         Log.e("curent ",String.valueOf(classes.getCurrent())+"      " +String.valueOf(classes.getTotal()));
+        Log.e("per",String.valueOf(classes.getCurrent()/classes.getTotal()));
+         float percentage = (classes.getCurrent()*100)/classes.getTotal();
+
+        arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+                .setRange(0, 100, 100)
+                .setInitialVisibility(false)
+                .setLineWidth(20f)
+                .build());
+        SeriesItem seriesItem1;
+
+
+        if(percentage>75.00){
+            //Create data series track
+            seriesItem1 = new SeriesItem.Builder(Color.argb(255, 79, 196, 0))
+                    .setRange(0, 100, 75)
+                    .setLineWidth(14f)
+                    .build();
+
+
+        }else{
+
+
+                   seriesItem1 = new SeriesItem.Builder(Color.RED)
+                            .setRange(0, 100, 0)
+                            .setLineWidth(14f)
+                            .build();
+        }
+
+
+
+
+
+
+        int series1Index = arcView.addSeries(seriesItem1);
+
+       // int seriesIndex2 = arcView.addSeries(seriesItem2);
+        //Calculating %age
+
+
+        arcView.addEvent(new DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
+                .setDelay(0)
+                .setDuration(1000)
+                .build());
+
+        arcView.addEvent(new DecoEvent.Builder(percentage).setIndex(series1Index).setDelay(3).build());
+        //arcView.addEvent(new DecoEvent.Builder(percentage).setIndex(seriesIndex2).setDelay(10).build());
 
         try {
             check = classes.getStatus();
