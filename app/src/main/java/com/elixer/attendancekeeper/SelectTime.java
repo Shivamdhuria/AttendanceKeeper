@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +26,7 @@ public class SelectTime extends AppCompatActivity {
     RelativeLayout relativeLayout;
     CheckBox checkbox;
     int i;
-    protected static ArrayList<String> arrayListTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +38,8 @@ public class SelectTime extends AppCompatActivity {
         //initialize checkbox
         checkbox = (CheckBox)findViewById(R.id.check_box_default);
 
-
+        daysTime = new ArrayList<>(
+                Arrays.asList("null","null","null","null","null","null","null"));
         Log.e("Days", arrayList.toString());
         //textview
         textViewMonday=(TextView) findViewById(R.id.textview_monday);
@@ -134,7 +134,7 @@ public class SelectTime extends AppCompatActivity {
         checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Douh!!",Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(),"Douh!!",Toast.LENGTH_LONG).show();
                 //Dissapearing Edit Texts
                 if(gridLayout.getVisibility()==View.VISIBLE) {
                     gridLayout.setVisibility(View.INVISIBLE);
@@ -152,16 +152,14 @@ public class SelectTime extends AppCompatActivity {
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                arrayListTime = new ArrayList<>(
-                        Arrays.asList("0", "0", "0", "0", "0", "0", "0")
-                );
+
 
                 for (int i = 0; i < 7; i++) {
                     //if default time is set
                     if (checkbox.isChecked()) {
                         if (!arrayList.get(i) .equals("null")) {
 
-                            arrayListTime.set(i, defaultTime.getText().toString());
+                            daysTime.set(i, defaultTime.getText().toString());
 
                         }
 
@@ -173,43 +171,43 @@ public class SelectTime extends AppCompatActivity {
                                 if (i == 0) {
                                     Log.d("MONday",mondayTime.getText().toString());
                                     String mondaay=mondayTime.getText().toString();
-                                    arrayListTime.set(i, mondayTime.getText().toString());
+                                    daysTime.set(i, mondayTime.getText().toString());
 
                                 }
                                 //For TUESDAY
                                 if (i == 1) {
-                                    arrayListTime.set(i, tuesdayTime.getText().toString());
+                                    daysTime.set(i, tuesdayTime.getText().toString());
 
                                 }
 
 
                                 //For WEDNESDAY
                                 if (i == 2) {
-                                    arrayListTime.set(i, wednesdayTime.getText().toString());
+                                    daysTime.set(i, wednesdayTime.getText().toString());
 
                                 }
 
                                 //For ThursDAY
                                 if (i == 3) {
-                                    arrayListTime.set(i, thursdayTime.getText().toString());
+                                    daysTime.set(i, thursdayTime.getText().toString());
 
                                 }
 
                                 //For FrIDAY
                                 if (i == 4) {
-                                    arrayListTime.set(i, fridayTime.getText().toString());
+                                    daysTime.set(i, fridayTime.getText().toString());
 
                                 }
 
                                 //For SATURDAY
                                 if (i == 5) {
-                                    arrayListTime.set(i, saturdayTime.getText().toString());
+                                    daysTime.set(i, saturdayTime.getText().toString());
 
                                 }
 
                                 //For SUNDAY
                                 if (i == 6) {
-                                    arrayListTime.set(i, sundayTime.getText().toString());
+                                    daysTime.set(i, sundayTime.getText().toString());
 
                                 }
 
@@ -218,8 +216,8 @@ public class SelectTime extends AppCompatActivity {
                     }
                 }
 
-                Log.e("TIME",arrayListTime.toString());
-               daysTime=arrayListTime;
+                Log.e("TIME",daysTime.toString());
+
                 Intent intentSelectTime = new Intent(getApplication(),SelectPriorities.class);
                 startActivity(intentSelectTime);
             }

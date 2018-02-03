@@ -51,7 +51,7 @@ public class CurrentAttendance extends AppCompatActivity {
                         //Creating Gson
                         Gson gson = new Gson();
                         String newClass = gson.toJson(newclass);
-                        Log.e("new class",newclass.days.toString());
+                         Log.e("DaysTime......... ",NewClass.daysTime.toString());
                         //Saving objects in String gson
                         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();

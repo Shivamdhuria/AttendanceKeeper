@@ -61,15 +61,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="Attendance:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView10"
-        android:textSize="12sp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/className" />
-
-    <TextView
         android:id="@+id/attendance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,6 +159,25 @@
 
         android:layout_below="@+id/view"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Attendance:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:textSize="12sp"
+        android:layout_below="@+id/viewTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="No class for today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_toStartOf="@+id/relativeLayout4"
+        android:id="@+id/textViewTime"
+        android:layout_marginTop="3dp" />
 
 
 </RelativeLayout>

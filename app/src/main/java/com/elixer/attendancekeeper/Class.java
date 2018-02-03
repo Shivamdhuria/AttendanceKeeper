@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Class {
     public String name;
     public ArrayList<String> days;
-    static ArrayList<String> daysTime;
+    public ArrayList<String> daysTime;
 
 
 
@@ -77,12 +77,13 @@ public class Class {
         this.days = days;
     }
 
-    public static ArrayList<String> getDaysTime() {
+
+    public ArrayList<String> getDaysTime() {
         return daysTime;
     }
 
-    public static void setDaysTime(ArrayList<String> daysTime) {
-        Class.daysTime = daysTime;
+    public void setDaysTime(ArrayList<String> daysTime) {
+        this.daysTime = daysTime;
     }
 
     public boolean isReminder() {

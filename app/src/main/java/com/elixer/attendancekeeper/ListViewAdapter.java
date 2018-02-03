@@ -24,11 +24,10 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -51,6 +50,9 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     Class classes;
     TextView textViewCurrent,textViewTotal;
     DecoView arcView;
+
+    int indexTime;
+    ArrayList<String> daysTime;
 
 
     //constructor initializing the values
@@ -81,12 +83,15 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
-        //textViewTotal  = view.findViewById(R.id.attendancetotal);
+        TextView textViewTime  = view.findViewById(R.id.textViewTime);
         DecoView arcView = (DecoView)view.findViewById(R.id.dynamicArcView);
         Button buttonAbsent = view.findViewById(R.id.button_absent);
         Button buttonPresent = view.findViewById(R.id.button_present);
         Button buttonOff = view.findViewById(R.id.button_off);
         String today = getDate();
+        //listtime
+        daysTime = new ArrayList<>();
+
 
 
 
@@ -104,6 +109,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         //adding values to the list item
       //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
+
         textViewCurrent.setText(" " +Integer.toString(classes.getCurrent())+"/"+Integer.toString(classes.getTotal()));
       //  textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         // Create background track
@@ -111,13 +117,13 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         //
          Log.e("curent ",String.valueOf(classes.getCurrent())+"      " +String.valueOf(classes.getTotal()));
         Log.e("per",String.valueOf(classes.getCurrent()/classes.getTotal()));
+
+
+
          float percentage = (classes.getCurrent()*100)/classes.getTotal();
 
         arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-
-
                 .setRange(0, 100, 100)
-
                 .setInitialVisibility(false)
                 .setLineWidth(20f)
                 .build());
@@ -201,8 +207,27 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
 
+            try {
+                Log.e("classe time",classes.getDaysTime().toString());
+                List <String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
+                textViewTime.setText("Class at "+listDaysTime.get(indexTime)+" today!");
+            }catch (Exception er){
+                er.printStackTrace();
+            }
+
             //setting  notifications
           //  setAlarm();
+
+        }
+
+        if(found){
+            try {
+                ArrayList <String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
+               // Log.e("days Time........",listDaysTime.toString());
+                //textViewTime.setText("Class at "+listDaysTime.get(indexTime)+"today.");
+            }catch (Exception er){
+                er.printStackTrace();
+            }
 
         }
 
@@ -342,13 +367,25 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
     private Boolean searchDay(String today) {
         Boolean val=false;
+
         //Load the list into a hashSet
-        Set<String> set = new HashSet<String>(classes.getDays());
-        if (set.contains(today))
+        List <String> listDays = new ArrayList<String>(classes.getDays());
+        for (String string : listDays)
         {
-           // Log.e("BOOOLEAN","FOUND");
-            val = true;
+            if(string.matches(today)){
+                // Log.e("BOOOLEAN","FOUND");
+                val = true;
+                indexTime = listDays.indexOf(string);
+                Log.e("index Value",String.valueOf(indexTime));
+
+
+
+            }
+
+
+            //Set<String> time = new HashSet<String>(classes.getDaysTime());
         }
+
         return val;
     }
 
