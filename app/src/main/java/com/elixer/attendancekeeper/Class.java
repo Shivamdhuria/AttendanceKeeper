@@ -19,6 +19,7 @@ public class Class {
     public int current;
     public int total;
     public Boolean status;
+    int update ;
 
 
     public Boolean getStatus() {
@@ -29,7 +30,7 @@ public class Class {
         this.status = status;
     }
 
-    public Class(String name, ArrayList<String> days, ArrayList<String> daysTime, boolean reminder, boolean alarm , int current, int total, Boolean status) {
+    public Class(String name, ArrayList<String> days, ArrayList<String> daysTime, boolean reminder, boolean alarm , int current, int total, Boolean status,int update) {
 
         this.name = name;
         this.days = days;
@@ -40,6 +41,7 @@ public class Class {
         this.total = total;
 
         this.status = status;
+        this.update = update;
 
 
 
@@ -47,6 +49,14 @@ public class Class {
 
     public String getName() {
         return name;
+    }
+
+    public int getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(int update) {
+        this.update = update;
     }
 
     public int getCurrent() {

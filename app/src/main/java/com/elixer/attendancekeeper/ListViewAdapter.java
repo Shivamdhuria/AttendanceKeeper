@@ -50,9 +50,13 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     Class classes;
     TextView textViewCurrent,textViewTotal;
     DecoView arcView;
-
+    View views;
+    View viewTitle;
     int indexTime;
     ArrayList<String> daysTime;
+    int activeClassesCount;
+    TextView textViewClassNumber;
+    Button buttonPresent,buttonOff,buttonAbsent;
 
 
     //constructor initializing the values
@@ -72,55 +76,56 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         //And for this we need a layoutinflater
 
 
-
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
         //getting the view
         View view = layoutInflater.inflate(resource, null, false);
 
         //getting the view elements of the list from the view
-       // ImageView imageView = view.findViewById(R.id.imageView);
+        // ImageView imageView = view.findViewById(R.id.imageView);
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
-        TextView textViewTime  = view.findViewById(R.id.textViewTime);
-        DecoView arcView = (DecoView)view.findViewById(R.id.dynamicArcView);
-        Button buttonAbsent = view.findViewById(R.id.button_absent);
-        Button buttonPresent = view.findViewById(R.id.button_present);
-        Button buttonOff = view.findViewById(R.id.button_off);
+        //textViewClassNumber=view.findViewById(R.id.textviewClassNumber);
+        TextView textViewTime = view.findViewById(R.id.textViewTime);
+        DecoView arcView = (DecoView) view.findViewById(R.id.dynamicArcView);
+         buttonAbsent = view.findViewById(R.id.button_absent);
+        buttonPresent = view.findViewById(R.id.button_present);
+        buttonOff = view.findViewById(R.id.button_off);
+        views = view.findViewById(R.id.view);
+        viewTitle = view.findViewById(R.id.viewTitle);
         String today = getDate();
         //listtime
         daysTime = new ArrayList<>();
+        activeClassesCount = 0;
+       // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
 
 
-
-
-
-
-
-      //  final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
-      //  final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
-
+        //  final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
+        //  final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
 
 
         //getting the hero of the specified position
-       classes = classList.get(position);
+        classes = classList.get(position);
 
         //adding values to the list item
-      //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
+        //  imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(classes.getName());
 
-        textViewCurrent.setText(" " +Integer.toString(classes.getCurrent())+"/"+Integer.toString(classes.getTotal()));
-      //  textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        textViewCurrent.setText(" " + Integer.toString(classes.getCurrent()) + "/" + Integer.toString(classes.getTotal()));
+        //  textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         // Create background track
         //
         //
-         Log.e("curent ",String.valueOf(classes.getCurrent())+"      " +String.valueOf(classes.getTotal()));
-        Log.e("per",String.valueOf(classes.getCurrent()/classes.getTotal()));
+        Log.e("curent ", String.valueOf(classes.getCurrent()) + "      " + String.valueOf(classes.getTotal()));
+//        Log.e("per", String.valueOf(classes.getCurrent() / classes.getTotal()));
+        float percentage;
+        try {
+           percentage = (classes.getCurrent() * 100) / classes.getTotal();
+        }catch (ArithmeticException ex){
+            percentage=0;
+        }
 
-
-
-         float percentage = (classes.getCurrent()*100)/classes.getTotal();
 
         arcView.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
                 .setRange(0, 100, 100)
@@ -129,12 +134,11 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 .build());
 
 
-     //   int backIndex = srcView.addSeries(seriesItem);
+        //   int backIndex = srcView.addSeries(seriesItem);
         final SeriesItem seriesItem1;
 
 
-
-        if(percentage>75.00){
+        if (percentage > 75.00) {
             //Create data series track
             seriesItem1 = new SeriesItem.Builder(Color.argb(255, 79, 196, 0))
 
@@ -144,25 +148,21 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                     .build();
 
 
-        }else{
+        } else {
 
 
-                   seriesItem1 = new SeriesItem.Builder(Color.RED)
+            seriesItem1 = new SeriesItem.Builder(Color.RED)
 
-                            .setRange(0, 100, 0)
-                            .setLineWidth(14f)
-                           .setSpinDuration(800)
-                            .build();
+                    .setRange(0, 100, 0)
+                    .setLineWidth(14f)
+                    .setSpinDuration(800)
+                    .build();
         }
-
-
-
-
 
 
         int series1Index = arcView.addSeries(seriesItem1);
 
-       // int seriesIndex2 = arcView.addSeries(seriesItem2);
+        // int seriesIndex2 = arcView.addSeries(seriesItem2);
         //Calculating %age
 
 
@@ -194,56 +194,57 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             check = classes.getStatus();
             //  Log.d("check from data",check.toString());
             status.setChecked(check);
-        }catch (Exception er){
+        } catch (Exception er) {
             er.printStackTrace();
         }
 
         //Making buttons appear if today string not found and setting up notifacations and alars
-        Boolean found =searchDay(today);
-     //   Log.e("BOOOLEAN",found.toString());
-        if(found){
-         //   Log.e("INVI","INVIIIII");
+        Boolean found = searchDay(today);
+        //   Log.e("BOOOLEAN",found.toString());
+        if (found) {
+            //   Log.e("INVI","INVIIIII");
             buttonAbsent.setVisibility(View.VISIBLE);
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
+            views.setVisibility(View.VISIBLE);
+            viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
+            activeClassesCount = activeClassesCount + 1;
 
             try {
-                Log.e("classe time",classes.getDaysTime().toString());
-                List <String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
-                textViewTime.setText("Class at "+listDaysTime.get(indexTime)+" today!");
-            }catch (Exception er){
+                Log.e("classe time", classes.getDaysTime().toString());
+                List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
+                textViewTime.setText("Class at " + listDaysTime.get(indexTime) + " today!");
+            } catch (Exception er) {
                 er.printStackTrace();
             }
 
             //setting  notifications
-          //  setAlarm();
+            //  setAlarm();
 
         }
 
-        if(found){
-            try {
-                ArrayList <String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
-               // Log.e("days Time........",listDaysTime.toString());
-                //textViewTime.setText("Class at "+listDaysTime.get(indexTime)+"today.");
-            }catch (Exception er){
-                er.printStackTrace();
-            }
+        if(classes.getUpdate()==1){
+            buttonInvisible();
 
         }
 
 
+//         textViewClassNumber.setText(String.valueOf(activeClassesCount)+ " classes today.");
         //Buttons initialised here
         buttonPresent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                classes=classList.get(position);
+                classes = classList.get(position);
                 int current = classes.getCurrent();
                 int total = classes.getTotal();
-                current = current+1;
-                total=total+1;
+                current = current + 1;
+                total = total + 1;
                 classes.setCurrent(current);
                 classes.setTotal(total);
                 cancelReminder(classes.getName());
+                saveinsharedpref(classes);
+                buttonInvisible();
+                classes.setUpdate(1);
                 saveinsharedpref(classes);
             }
         });
@@ -251,14 +252,17 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         buttonAbsent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                classes=classList.get(position);
+                classes = classList.get(position);
                 int current = classes.getCurrent();
                 int total = classes.getTotal();
-               // current = current+1;
-                total=total+1;
-               // classes.setCurrent(current);
+                // current = current+1;
+                total = total + 1;
+                // classes.setCurrent(current);
                 classes.setTotal(total);
                 cancelReminder(classes.getName());
+                saveinsharedpref(classes);
+                buttonInvisible();
+                classes.setUpdate(1);
                 saveinsharedpref(classes);
             }
         });
@@ -266,11 +270,14 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         buttonOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                classes=classList.get(position);
+                classes = classList.get(position);
                 int current = classes.getCurrent();
                 int total = classes.getTotal();
                 cancelReminder(classes.getName());
 
+                saveinsharedpref(classes);
+                buttonInvisible();
+                classes.setUpdate(1);
                 saveinsharedpref(classes);
             }
         });
@@ -290,17 +297,17 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 } else {
                     check = true;
                     //Runing service again
-                        Intent intentService = new Intent(context,Run.class);
-                        context.startService(intentService);
+                    Intent intentService = new Intent(context, Run.class);
+                    context.startService(intentService);
 
                 }
                 classes.setStatus(check);
 
                 saveinsharedpref(classes);
 
-             //   Log.d(classes.getName().toString() + " checkto loop", check.toString());
-            //    Intent intentService = new Intent(context,Run.class);
-              //  startRun(context);
+                //   Log.d(classes.getName().toString() + " checkto loop", check.toString());
+                //    Intent intentService = new Intent(context,Run.class);
+                //  startRun(context);
 
 
             }
@@ -308,12 +315,11 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             private void saveinsharedpref(Class newclass) {
 
 
-
                 Gson gson = new Gson();
                 String newClass = gson.toJson(classes);
-                SharedPreferences sharedPref =getContext().getSharedPreferences("attend",Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = getContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(newclass.name,newClass);
+                editor.putString(newclass.name, newClass);
                 editor.commit();
             }
         });
@@ -324,7 +330,20 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
 
+
         return view;
+    }
+
+    private void buttonInvisible() {
+        {
+            buttonAbsent.setVisibility(View.GONE);
+            buttonOff.setVisibility(View.GONE);
+            buttonPresent.setVisibility(View.GONE);
+            viewTitle.setBackgroundColor(Color.parseColor("#dedede"));
+            Log.e("INVI..","invvv");
+        }
+
+
     }
 
     private void cancelReminder(String name) {
@@ -418,6 +437,11 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         Intent intentService = new Intent(context,Run.class);
         context.startService(intentService);
     }
+
+
+
+
+
 
 
 }

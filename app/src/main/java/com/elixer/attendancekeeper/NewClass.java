@@ -22,6 +22,7 @@ public class NewClass extends AppCompatActivity {
     static Boolean reminder;
     static Boolean alarm;
     EditText editText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

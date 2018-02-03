@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+       // TextView textView = (TextView)findViewById(R.id.textviewClassNumber);
 
         //initializing listview
         //initializing objects
@@ -204,4 +205,6 @@ public class MainActivity extends AppCompatActivity
         //attaching adapter to the listview
         listView.setAdapter(adapter);
     }
+
+
 }
