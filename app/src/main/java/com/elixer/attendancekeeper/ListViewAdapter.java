@@ -207,7 +207,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
             views.setVisibility(View.VISIBLE);
-            viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
+           // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
             activeClassesCount = activeClassesCount + 1;
 
             try {
@@ -225,6 +225,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         if(classes.getUpdate()==1){
             buttonInvisible();
+            views.setVisibility(View.GONE);
 
         }
 
@@ -246,6 +247,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
+               // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
             }
         });
 
@@ -264,6 +266,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
+               // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
             }
         });
 
@@ -350,7 +353,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         int hashcode = name.hashCode();
-        Log.e("Cancell, Alarm","cancelling....."+ name+ String.valueOf(hashcode));
+        Log.e("Cancell, Alarm","cancelling....."+ name);
         //Intent myIntent = new Intent(getContext(),NotificationPublisher.class);
         Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);

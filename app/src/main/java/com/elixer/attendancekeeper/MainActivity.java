@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity
         classList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listview);
 
-        //Set alarm for date change on create
-        setAlarmForDate();
+
 
         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         //Try to fetch all values from shared preferene
         try{
             fetchAllPreference();
-            BeginService();
+
 
         }catch (Exception ex){
 
@@ -201,7 +200,9 @@ public class MainActivity extends AppCompatActivity
 
         //creating the adapter
        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_row, classList);
-
+        //Set alarm for date change on create
+        setAlarmForDate();
+        BeginService();
         //attaching adapter to the listview
         listView.setAdapter(adapter);
     }

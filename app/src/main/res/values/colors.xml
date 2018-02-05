@@ -6,4 +6,5 @@
     <color name="backgroundgrey">#F4F5FA</color>
     <color name="colorAccentOpposite">#9CE81C</color>
     <color name="colorGreyText">#23000000</color>
+    <color name="colorBlue">#FB5056</color>
 </resources>

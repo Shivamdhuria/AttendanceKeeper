@@ -14,14 +14,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Run extends IntentService {
     List<Class> classList;
     Class classes;
+    int indexTime;
 
     // Must create a default constructor
     public Run() {
@@ -60,20 +59,29 @@ public class Run extends IntentService {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
         //Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
-        Log.e("Alarm sice to run again","Alarm Manager for Service at 0.05  " + calendar.get(Calendar.DAY_OF_WEEK));
+        Log.e("Alarm for tomorrow","Alarm Manager RUN at 0.05  ,Hour" + calendar.get(Calendar.HOUR_OF_DAY));
     }
 
     private Boolean searchDay(Class classes,String today) {
 
-        Boolean val=false;
+        Boolean val = false;
         //Load the list into a hashSet
-        Set<String> set = new HashSet<String>(classes.getDays());
-        if (set.contains(today))
-        {
-            //Log.e("BOOOLEAN","FOUND");
-            val = true;
+        List<String> listDays = new ArrayList<String>(classes.getDays());
+        for (String string : listDays) {
+            if (string.matches(today)) {
+                // Log.e("BOOOLEAN","FOUND");
+                val = true;
+                indexTime = listDays.indexOf(string);
+              //  Log.e("index Value", String.valueOf(indexTime));
+
+
+            }
+
+
+            //Set<String> time = new HashSet<String>(classes.getDaysTime());
         }
-        return val;
+            return val;
+
     }
 
     private String getDate() {
@@ -109,8 +117,16 @@ public class Run extends IntentService {
             if(found && classes.getStatus() && classes.isReminder()){
                 //Same day as Today,Set alarm here
                 Log.e("Setting Alarm for class",classes.getName());
-                setAlarm(classes.getName());
 
+                try {
+                    // Log.e("classe time", classes.getDaysTime().toString());
+                    List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
+                    Log.e("Alame name and time","Class at " + listDaysTime.get(indexTime) + " today!   :"+classes.getName());
+                    setAlarm(classes.getName(),listDaysTime.get(indexTime));
+
+                } catch (Exception er) {
+                    er.printStackTrace();
+                }
             }
 
 
@@ -119,29 +135,39 @@ public class Run extends IntentService {
 
 
     }
-    private void setAlarm(String className) {
+    private void setAlarm(String className,String times) {
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        int hour=0,min=0;
+        try {
+            String[] time = times.split ( ":" );
+           hour = Integer.parseInt ( time[0].trim() );
+             min = Integer.parseInt ( time[1].trim() );
 
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 2);
-        calendar.set(Calendar.MINUTE, 26);
+
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, min);
         calendar.set(Calendar.SECOND, 0);
-
-        Intent notificationMessage = new Intent(this,NotificationPublisher.class);
-         //Log.e("Setting Alarm.",".............");
-
+        if(calendar.getTimeInMillis()>System.currentTimeMillis()) {//Set alarm if time is greater
+            Intent notificationMessage = new Intent(this, NotificationPublisher.class);
+            //Log.e("Setting Alarm.",".............");
+            Log.e("Setting alarm/Date.....", className + "    " + calendar.getTime().toString());
 //This is alarm manager
-        //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
-        //calendar.setTimeInMillis(time);
-        //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        int hashcode = className.hashCode();
-        Log.e("unique id from string", String.valueOf(hashcode));//1843668795
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this,hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + (30 * 1000), pendingIntent);
+            //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+            //calendar.setTimeInMillis(time);
+            //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            int hashcode = className.hashCode();
+            ;//1843668795
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    this, hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
 
     }
 }
