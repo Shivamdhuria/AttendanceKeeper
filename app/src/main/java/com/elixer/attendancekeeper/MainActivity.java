@@ -200,8 +200,9 @@ public class MainActivity extends AppCompatActivity
 
         //creating the adapter
        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_row, classList);
-        //Set alarm for date change on create
+        //Set alarm for date change on create for tomorrow
         setAlarmForDate();
+        //This class runs service
         BeginService();
         //attaching adapter to the listview
         listView.setAdapter(adapter);

@@ -33,16 +33,18 @@ public class Run extends IntentService {
         super.onCreate(); // if you override onCreate(), make sure to call super().
         // If a Context object is needed, call getApplicationContext() here.
         classList = new ArrayList<>();
+        //Only Once Run
+
+        setUpAlarmForNextDay();
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         // This describes what will happen when service is triggered
-        Log.e("Service Running","To set alarms/Reminder for individual");
-
-
+        Log.e("Service Running","Run Running......");
         fetchAllPreference();
-        setUpAlarmForNextDay();
+
+
 
     }
 
@@ -109,14 +111,14 @@ public class Run extends IntentService {
             Class classes = gson.fromJson(entry.getValue().toString(), Class.class);
 
             /** Print one variable to the console */
-            System.out.println("Username : " + classes.getName());
+          //  System.out.println("Username : " + classes.getName());
             String today=getDate();
             Boolean found =searchDay(classes,today);
             classList.add(classes);
          //   Log.e("BOOOLEAN",found.toString());
             if(found && classes.getStatus() && classes.isReminder()){
                 //Same day as Today,Set alarm here
-                Log.e("Setting Alarm for class",classes.getName());
+               // Log.e("Setting Alarm for class",classes.getName());
 
                 try {
                     // Log.e("classe time", classes.getDaysTime().toString());
@@ -147,12 +149,13 @@ public class Run extends IntentService {
             e.printStackTrace();
         }
         Calendar calendar = Calendar.getInstance();
-
+        long currentTime = System.currentTimeMillis();
 
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, min);
         calendar.set(Calendar.SECOND, 0);
-        if(calendar.getTimeInMillis()>System.currentTimeMillis()) {//Set alarm if time is greater
+        long alarmTime = calendar.getTimeInMillis();
+        if(alarmTime>currentTime) {//Set alarm if time is greater
             Intent notificationMessage = new Intent(this, NotificationPublisher.class);
             //Log.e("Setting Alarm.",".............");
             Log.e("Setting alarm/Date.....", className + "    " + calendar.getTime().toString());
@@ -167,6 +170,10 @@ public class Run extends IntentService {
                     this, hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }else{
+
+            Log.d("TIME ", (String.valueOf( calendar.getTimeInMillis())+"   "+String.valueOf(calendar.getTimeInMillis())));
+
         }
 
     }
