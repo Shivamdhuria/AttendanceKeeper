@@ -21,25 +21,30 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:text="Total Classes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:textSize="18sp"
+                android:textColor="@android:color/background_light"
+                android:layout_alignBaseline="@+id/editTextCurrent"
+                android:layout_alignBottom="@+id/editTextCurrent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Total Classes"
-                    android:layout_width="179dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView6"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/background_light"
-                    android:layout_alignBaseline="@+id/editTextCurrent"
-                    android:layout_alignBottom="@+id/editTextCurrent"
-                    android:layout_alignParentStart="true" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="50dp"
+                android:paddingTop="50dp">
 
                 <EditText
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
@@ -47,49 +52,75 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
-                    android:layout_alignBaseline="@+id/textView6"
-                    android:layout_alignBottom="@+id/textView6"
-                    android:layout_toEndOf="@+id/textView6"
-                    android:layout_marginStart="11dp" />
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="60dp" />
 
+                <Button
+                    android:text="-"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonMinusTotal"
+                    android:layout_alignBottom="@+id/editTextTotal"
+                    android:layout_toStartOf="@+id/editTextTotal" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button"
+                    android:layout_alignBaseline="@+id/editTextTotal"
+                    android:layout_alignBottom="@+id/editTextTotal"
+                    android:layout_toEndOf="@+id/editTextTotal" />
             </RelativeLayout>
+
+            <TextView
+                android:text="Current Attandance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:textSize="18sp"
+                android:textColor="@android:color/background_light"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:textAlignment="center" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:paddingBottom="50dp">
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextCurrent"
-                    android:layout_alignBaseline="@+id/textView5"
-                    android:layout_alignBottom="@+id/textView5"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="185dp"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textColor="@android:color/white" />
-
-                <TextView
-                    android:text="Current Attandance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView5"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/background_light"
+                    android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonAddCurrent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/editTextCurrent" />
+
+                <Button
+                    android:text="-"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonMinusCurrent"
+                    android:layout_marginEnd="61dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/buttonAddCurrent" />
 
             </RelativeLayout>
-
-            <Button
-                android:text="Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonSubmitdone" />
 
         </LinearLayout>
 
