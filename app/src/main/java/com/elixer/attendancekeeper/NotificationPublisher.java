@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
@@ -35,9 +37,14 @@ public class NotificationPublisher extends BroadcastReceiver {
             String id = "w01", name = "Class Reminder";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             String desc = "Mark your Attendance";
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                    .build();
 
             NotificationChannel channel = new NotificationChannel(id, name, importance);
             channel.setDescription(desc);
+            channel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),audioAttributes);
             notificationManager.createNotificationChannel(channel);
             builder = new Notification.Builder(context, id);
 
@@ -45,6 +52,8 @@ public class NotificationPublisher extends BroadcastReceiver {
             builder.setAutoCancel(false);
             builder.setContentTitle("Class Reminder");
             builder.setContentText("Mark your Attendance");
+
+
 
             builder.setSmallIcon(R.drawable.ic_notifications_black_24dp);
             // builder.setContentIntent(pendingIntent);
@@ -63,7 +72,7 @@ public class NotificationPublisher extends BroadcastReceiver {
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("Class Reminder")
                             .setContentText("Mark Your Attendance")
-
+                            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                             .setVibrate(new long[] { 0,1000,1000, 1000, 1000 })
                             .setLights(Color.YELLOW, 3000, 3000);
             mBuilder.setContentIntent(contentIntent);

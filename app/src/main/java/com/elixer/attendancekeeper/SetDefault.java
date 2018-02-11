@@ -18,7 +18,7 @@ public class SetDefault extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_default);
-        switchPresent=(Switch)findViewById(R.id.switchPresent);
+
         editTextPercentage=(EditText)findViewById(R.id.editTextPercentage);
         buttonSubmit= (Button)findViewById( R.id.buttonSubmit);
 
