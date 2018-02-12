@@ -22,7 +22,7 @@ public class CurrentAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_attendance);
 
-        buttonSubmitdone=(Button)findViewById(R.id.buttonSubmitdone);
+
         editTextCurrent=(EditText)findViewById(R.id.editTextCurrent);
         editTextTotal=(EditText)findViewById(R.id.editTextTotal);
 
