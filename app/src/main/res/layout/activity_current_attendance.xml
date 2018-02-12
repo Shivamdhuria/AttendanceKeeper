@@ -68,7 +68,7 @@
                     android:text="+"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button"
+                    android:id="@+id/buttonAddTotal"
                     android:layout_alignBaseline="@+id/editTextTotal"
                     android:layout_alignBottom="@+id/editTextTotal"
                     android:layout_toEndOf="@+id/editTextTotal" />
@@ -121,6 +121,12 @@
                     android:layout_toStartOf="@+id/buttonAddCurrent" />
 
             </RelativeLayout>
+
+            <Button
+                android:text="Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSubmit" />
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.elixer.attendancekeeper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -74,15 +75,15 @@ public class SelectTime extends AppCompatActivity {
             if (arrayList.get(i).equals("null")) {
                 //For MONDAY
                 if (i == 0) {
-                    textViewMonday.setVisibility(View.INVISIBLE);
-                    mondayTime.setVisibility(View.INVISIBLE);
+                    textViewMonday.setVisibility(View.GONE);
+                    mondayTime.setVisibility(View.GONE);
 
                 }
 
                 //For TUESDAY
                 if (i == 1) {
-                    textViewTuesday.setVisibility(View.INVISIBLE);
-                    tuesdayTime.setVisibility(View.INVISIBLE);
+                    textViewTuesday.setVisibility(View.GONE);
+                    tuesdayTime.setVisibility(View.GONE);
 
 
                 }
@@ -90,40 +91,40 @@ public class SelectTime extends AppCompatActivity {
 
                 //For WEDNESDAY
                 if (i == 2) {
-                    textViewWednesday.setVisibility(View.INVISIBLE);
-                    wednesdayTime.setVisibility(View.INVISIBLE);
+                    textViewWednesday.setVisibility(View.GONE);
+                    wednesdayTime.setVisibility(View.GONE);
 
 
                 }
 
                 //For ThursDAY
                 if (i == 3) {
-                    textViewThursday.setVisibility(View.INVISIBLE);
-                    thursdayTime.setVisibility(View.INVISIBLE);
+                    textViewThursday.setVisibility(View.GONE);
+                    thursdayTime.setVisibility(View.GONE);
 
 
                 }
 
                 //For FrIDAY
                 if (i == 4) {
-                    textViewFriday.setVisibility(View.INVISIBLE);
-                    fridayTime.setVisibility(View.INVISIBLE);
+                    textViewFriday.setVisibility(View.GONE);
+                    fridayTime.setVisibility(View.GONE);
 
 
                 }
 
                 //For SATURDAY
                 if (i == 5) {
-                    textViewSaturday.setVisibility(View.INVISIBLE);
-                    saturdayTime.setVisibility(View.INVISIBLE);
+                    textViewSaturday.setVisibility(View.GONE);
+                    saturdayTime.setVisibility(View.GONE);
 
 
                 }
 
                 //For SUNDAY
                 if (i == 6) {
-                    textViewSunday.setVisibility(View.INVISIBLE);
-                    sundayTime.setVisibility(View.INVISIBLE);
+                    textViewSunday.setVisibility(View.GONE);
+                    sundayTime.setVisibility(View.GONE);
 
 
                 }
@@ -132,6 +133,7 @@ public class SelectTime extends AppCompatActivity {
 
 
         checkbox.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                // Toast.makeText(getApplicationContext(),"Douh!!",Toast.LENGTH_LONG).show();
@@ -150,14 +152,17 @@ public class SelectTime extends AppCompatActivity {
         });
 
         button_submit.setOnClickListener(new View.OnClickListener() {
+            //Value of no error
+            Boolean noError = false;
+
             @Override
             public void onClick(View view) {
-
+                int count = 0;
 
                 for (int i = 0; i < 7; i++) {
                     //if default time is set
                     if (checkbox.isChecked()) {
-                        if (!arrayList.get(i) .equals("null")) {
+                        if (!arrayList.get(i).equals("null")) {
 
                             daysTime.set(i, defaultTime.getText().toString());
 
@@ -166,60 +171,104 @@ public class SelectTime extends AppCompatActivity {
                     } else {
                         //if default time isn't set
 
-                            if (!arrayList.get(i).equals("null")) {
-                                //For MONDAY
-                                if (i == 0) {
-                                    Log.d("MONday",mondayTime.getText().toString());
-                                    String mondaay=mondayTime.getText().toString();
-                                    daysTime.set(i, mondayTime.getText().toString());
+                        if (!arrayList.get(i).equals("null")) {
+                            //For MONDAY
+                            if (i == 0) {
 
+
+                                daysTime.set(i, mondayTime.getText().toString());
+                                if(searchIfEmpty(mondayTime.getText().toString())){
+                                    count=count+1;
                                 }
-                                //For TUESDAY
-                                if (i == 1) {
-                                    daysTime.set(i, tuesdayTime.getText().toString());
-
-                                }
-
-
-                                //For WEDNESDAY
-                                if (i == 2) {
-                                    daysTime.set(i, wednesdayTime.getText().toString());
-
-                                }
-
-                                //For ThursDAY
-                                if (i == 3) {
-                                    daysTime.set(i, thursdayTime.getText().toString());
-
-                                }
-
-                                //For FrIDAY
-                                if (i == 4) {
-                                    daysTime.set(i, fridayTime.getText().toString());
-
-                                }
-
-                                //For SATURDAY
-                                if (i == 5) {
-                                    daysTime.set(i, saturdayTime.getText().toString());
-
-                                }
-
-                                //For SUNDAY
-                                if (i == 6) {
-                                    daysTime.set(i, sundayTime.getText().toString());
-
-                                }
-
 
                             }
+                            //For TUESDAY
+                            if (i == 1) {
+                                daysTime.set(i, tuesdayTime.getText().toString());
+                                if(searchIfEmpty(tuesdayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+
+                            //For WEDNESDAY
+                            if (i == 2) {
+                                daysTime.set(i, wednesdayTime.getText().toString());
+                                if(searchIfEmpty(wednesdayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+                            //For ThursDAY
+                            if (i == 3) {
+                                daysTime.set(i, thursdayTime.getText().toString());
+                                if(searchIfEmpty(thursdayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+                            //For FrIDAY
+                            if (i == 4) {
+                                daysTime.set(i, fridayTime.getText().toString());
+                                if(searchIfEmpty(fridayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+                            //For SATURDAY
+                            if (i == 5) {
+                                daysTime.set(i, saturdayTime.getText().toString());
+                                if(searchIfEmpty(saturdayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+                            //For SUNDAY
+                            if (i == 6) {
+                                daysTime.set(i, sundayTime.getText().toString());
+                                if(searchIfEmpty(sundayTime.getText().toString())){
+                                    count=count+1;
+                                }
+
+                            }
+
+
+                        }
                     }
                 }
 
-                Log.e("TIME",daysTime.toString());
+                if (checkbox.isChecked() && defaultTime.getText().toString().equals("")) {
 
-                Intent intentSelectTime = new Intent(getApplication(),SelectPriorities.class);
-                startActivity(intentSelectTime);
+                    count=count+1;
+
+
+                }
+
+
+                if(count>0) {
+                    Snackbar.make(view, "Time field empty", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+
+                }else{
+
+
+                    Intent intentSelectTime = new Intent(getApplication(), SelectPriorities.class);
+                    startActivity(intentSelectTime);
+
+
+                }
+                }
+
+            private Boolean searchIfEmpty(String s) {
+
+                return s.equals("");
+
             }
 
 

@@ -19,6 +19,26 @@ public class SelectPriorities extends AppCompatActivity {
         checkReminder = (CheckBox)findViewById(R.id.check_box_reminder);
         checkAlarm=(CheckBox)findViewById(R.id.check_box_alarm);
         buttonSubmit=(Button)findViewById(R.id.button_submit);
+
+
+        checkAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkAlarm.isChecked() && checkReminder.isChecked()) {
+                    checkReminder.setChecked(false);
+                }
+
+            }
+        });
+        checkReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkAlarm.isChecked() && checkReminder.isChecked()) {
+                    checkAlarm.setChecked(false);
+                }
+
+            }
+        });
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

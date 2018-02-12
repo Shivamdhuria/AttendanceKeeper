@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 
 public class CurrentAttendance extends AppCompatActivity {
-    Button buttonSubmitdone;
+    Button buttonSubmit,buttonAddTotal,buttonMinusTotal,buttonAddCurrent,buttonMinusCurrent;
     EditText editTextTotal,editTextCurrent;
 
     @Override
@@ -25,9 +25,47 @@ public class CurrentAttendance extends AppCompatActivity {
 
         editTextCurrent=(EditText)findViewById(R.id.editTextCurrent);
         editTextTotal=(EditText)findViewById(R.id.editTextTotal);
+        buttonSubmit=(Button)findViewById(R.id.buttonSubmit);
+        buttonAddTotal = (Button) findViewById(R.id.buttonAddTotal);
+        buttonMinusTotal = (Button) findViewById(R.id.buttonMinusTotal);
+        buttonAddCurrent = (Button) findViewById(R.id.buttonAddCurrent);
+        buttonMinusCurrent = (Button) findViewById(R.id.buttonMinusCurrent);
+
+        buttonAddTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextTotal.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) + 1));
 
 
-        buttonSubmitdone.setOnClickListener(new View.OnClickListener() {
+            }
+        });
+        buttonMinusTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextTotal.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) - 1));
+
+
+            }
+        });
+
+        buttonAddCurrent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextCurrent.getText().toString()) + 1));
+
+
+            }
+        });
+        buttonMinusCurrent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) - 1));
+
+
+            }
+        });
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Integer.parseInt(editTextCurrent.getText().toString())>Integer.parseInt(editTextTotal.getText().toString())){

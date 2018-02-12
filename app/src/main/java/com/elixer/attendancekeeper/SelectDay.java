@@ -2,6 +2,7 @@ package com.elixer.attendancekeeper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.elixer.attendancekeeper.NewClass.days;
 
@@ -34,6 +36,7 @@ public class SelectDay extends AppCompatActivity {
         saturday = (CheckBox)findViewById(R.id.checkbox_saturday);
         sunday = (CheckBox)findViewById(R.id.checkbox_sunday);
         button_submit = (Button)findViewById(R.id.button_submit);
+
 
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +68,25 @@ public class SelectDay extends AppCompatActivity {
                     arrayList.set(6, "Sun");
                 }
 
-                Intent intentSelectTime = new Intent(getApplicationContext(),SelectTime.class);
-                startActivity(intentSelectTime);
-                days = arrayList;
+                //Compare to see if null
+                if(compareList(arrayList)){
+                    Snackbar.make(view, "Select atleast one working day", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }else {
+                    Intent intentSelectTime = new Intent(getApplicationContext(), SelectTime.class);
+                    startActivity(intentSelectTime);
+                    days = arrayList;
+                }
             }
         });
 
 
 
+    }
+    public static boolean compareList(List ls1){
+         List ls2= new ArrayList<>(
+                 Arrays.asList("null","null","null","null","null","null","null"));
+        return ls1.toString().contentEquals(ls2.toString())?true:false;
     }
 }
