@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_current_attendance"
     android:layout_width="match_parent"
@@ -56,22 +57,26 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="60dp" />
 
-                <Button
-                    android:text="-"
-                    android:layout_width="30dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/plus"
+                    android:id="@+id/buttonAddTotal"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/editTextTotal"
+                    app:backgroundTint="@color/colorAccentOpposite" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/minus"
                     android:id="@+id/buttonMinusTotal"
                     android:layout_alignBottom="@+id/editTextTotal"
                     android:layout_toStartOf="@+id/editTextTotal" />
-
-                <Button
-                    android:text="+"
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buttonAddTotal"
-                    android:layout_alignBaseline="@+id/editTextTotal"
-                    android:layout_alignBottom="@+id/editTextTotal"
-                    android:layout_toEndOf="@+id/editTextTotal" />
             </RelativeLayout>
 
             <TextView
@@ -103,22 +108,26 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
 
-                <Button
-                    android:text="+"
-                    android:layout_width="30dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/plus"
                     android:id="@+id/buttonAddCurrent"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/editTextCurrent" />
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/editTextCurrent"
+                    app:backgroundTint="@color/colorAccentOpposite" />
 
-                <Button
-                    android:text="-"
-                    android:layout_width="30dp"
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonMinusCurrent"
-                    android:layout_marginEnd="61dp"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/minus"
                     android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/buttonAddCurrent" />
+                    android:layout_toStartOf="@+id/editTextCurrent"
+                    android:id="@+id/buttonMinusCurrent" />
 
             </RelativeLayout>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +15,9 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 
 public class CurrentAttendance extends AppCompatActivity {
-    Button buttonSubmit,buttonAddTotal,buttonMinusTotal,buttonAddCurrent,buttonMinusCurrent;
+    FloatingActionButton buttonAddTotal,buttonMinusTotal,buttonAddCurrent,buttonMinusCurrent;
     EditText editTextTotal,editTextCurrent;
+    Button buttonSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +28,10 @@ public class CurrentAttendance extends AppCompatActivity {
         editTextCurrent=(EditText)findViewById(R.id.editTextCurrent);
         editTextTotal=(EditText)findViewById(R.id.editTextTotal);
         buttonSubmit=(Button)findViewById(R.id.buttonSubmit);
-        buttonAddTotal = (Button) findViewById(R.id.buttonAddTotal);
-        buttonMinusTotal = (Button) findViewById(R.id.buttonMinusTotal);
-        buttonAddCurrent = (Button) findViewById(R.id.buttonAddCurrent);
-        buttonMinusCurrent = (Button) findViewById(R.id.buttonMinusCurrent);
+        buttonAddTotal = (FloatingActionButton) findViewById(R.id.buttonAddTotal);
+        buttonMinusTotal = (FloatingActionButton) findViewById(R.id.buttonMinusTotal);
+        buttonAddCurrent = (FloatingActionButton) findViewById(R.id.buttonAddCurrent);
+        buttonMinusCurrent = (FloatingActionButton) findViewById(R.id.buttonMinusCurrent);
 
         buttonAddTotal.setOnClickListener(new View.OnClickListener() {
             @Override

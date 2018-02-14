@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewClass" />
+        <activity android:name=".NewClass"/>
+            //android:windowSoftInputMode="stateAlwaysVisible|adjustPan|adjustResize"/>
         <activity android:name=".SelectDay" />
         <activity android:name=".SelectTime" />
         <activity android:name=".SelectPriorities" />
