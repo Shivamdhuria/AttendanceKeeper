@@ -35,12 +35,19 @@ import static android.content.Context.ALARM_SERVICE;
  * Created by Admin on 1/22/2018.
  */
 
-public class ListViewAdapter extends ArrayAdapter<Class> {
+public class ListViewAdapter extends ArrayAdapter<Class>  {
+
+
+
+
     //the list values in the List of type hero
     List<Class> classList;
 
     //activity context
     Context context;
+
+
+
 
     //the layout resource file for the list items
     int resource;
@@ -57,6 +64,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     int activeClassesCount;
     TextView textViewClassNumber;
     Button buttonPresent,buttonOff,buttonAbsent;
+    MyCallBack mCallBack = null;
 
 
     //constructor initializing the values
@@ -65,6 +73,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         this.context = context;
         this.resource = resource;
         this.classList = classList;
+
     }
 
     //this will return the ListView Item as a View
@@ -97,6 +106,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         String today = getDate();
         //listtime
         daysTime = new ArrayList<>();
+        //To Keep track of active Classes
         activeClassesCount = 0;
        // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
 
@@ -209,6 +219,11 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             views.setVisibility(View.VISIBLE);
            // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
             activeClassesCount = activeClassesCount + 1;
+            if(mOnDataChangeListener != null){
+                mOnDataChangeListener.onDataChanged(activeClassesCount);
+            }
+
+
 
             try {
                 Log.e("classe time", classes.getDaysTime().toString());
@@ -222,6 +237,9 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             //  setAlarm();
 
         }
+
+        //Displaying Number of Active Classes in TextView
+
 
         if(classes.getUpdate()==1){
             buttonInvisible();
@@ -326,12 +344,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
                 editor.commit();
             }
         });
-
-
-
-
-
-
+       // Update();
 
 
         return view;
@@ -436,15 +449,20 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         notifyDataSetChanged();
     }
 
-    private void startRun(Context context){
-        Intent intentService = new Intent(context,Run.class);
-        context.startService(intentService);
+    public void Update(){
+        TextView txtView = (TextView) ((MainActivity)context).findViewById(R.id.textViewRemainingClasses);
+        txtView.setText(String.valueOf(activeClassesCount)+" Classes Remaining");
     }
 
+    public interface OnDataChangeListener{
+        public void onDataChanged(int size);
+    }
+   // and add a setter for the listener (also in the adapter)
 
-
-
-
+    OnDataChangeListener mOnDataChangeListener;
+    public void setOnDataChangeListener(OnDataChangeListener onDataChangeListener){
+        mOnDataChangeListener = onDataChangeListener;
+    }
 
 
 }

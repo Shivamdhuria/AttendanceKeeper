@@ -19,22 +19,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener ,MyCallBack {
 
     //a List of type hero for holding list items
     List<Class> classList;
 
     //the listview
     ListView listView;
+    //For Current Date in Text View
+    TextView textViewCurrentDate;
+    TextView textViewRemainingClasses;
+    MyCallBack myCallBack;
+    ListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,10 @@ public class MainActivity extends AppCompatActivity
         //initializing objects
         classList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listview);
+        textViewCurrentDate = (TextView) findViewById(R.id.textviewDate);
+        textViewRemainingClasses=(TextView)findViewById(R.id.textViewRemainingClasses);
+        textViewRemainingClasses.setText("lol");
+
 
 
 
@@ -64,6 +76,12 @@ public class MainActivity extends AppCompatActivity
 
 
         }
+        //Setting Date
+
+
+        
+        //Setting Current Date
+        textViewCurrentDate.setText(getDate());
 
 
 
@@ -92,6 +110,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private String getDate() {
+        Date c = Calendar.getInstance().getTime();
+
+
+        SimpleDateFormat df = new SimpleDateFormat("dd");
+        String formattedDate = df.format(c);
+        return formattedDate;
     }
 
     private void BeginService() {
@@ -199,14 +226,32 @@ public class MainActivity extends AppCompatActivity
         }
 
         //creating the adapter
-       ListViewAdapter adapter = new ListViewAdapter(this, R.layout.list_row, classList);
+        adapter = new ListViewAdapter(this, R.layout.list_row, classList);
         //Set alarm for date change on create for tomorrow
         setAlarmForDate();
         //This class runs service
         BeginService();
         //attaching adapter to the listview
         listView.setAdapter(adapter);
+        adapter.setOnDataChangeListener(new ListViewAdapter.OnDataChangeListener() {
+            @Override
+            public void onDataChanged(int size) {
+                textViewRemainingClasses.setText(String.valueOf(size+" Class Remaing"));
+            }
+        });
     }
+
+
+
+    @Override
+    public void updateMyText(int value) {
+        TextView txtView = (TextView)findViewById(R.id.textViewRemainingClasses);
+        txtView.setText(value);
+    }
+    //Function to update TextView Classes Today
+
+
+
 
 
 }
