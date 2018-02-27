@@ -27,7 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -61,10 +63,13 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
     View viewTitle;
     int indexTime;
     ArrayList<String> daysTime;
-    int activeClassesCount;
+
     TextView textViewClassNumber;
     Button buttonPresent,buttonOff,buttonAbsent;
-    MyCallBack mCallBack = null;
+
+    int activeClassesCount=0;
+    private Set<String> active =new HashSet<String>();
+
 
 
     //constructor initializing the values
@@ -106,8 +111,9 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         String today = getDate();
         //listtime
         daysTime = new ArrayList<>();
+
         //To Keep track of active Classes
-        activeClassesCount = 0;
+
        // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
 
 
@@ -218,10 +224,8 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
             buttonOff.setVisibility(View.VISIBLE);
             views.setVisibility(View.VISIBLE);
            // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
-            activeClassesCount = activeClassesCount + 1;
-            if(mOnDataChangeListener != null){
-                mOnDataChangeListener.onDataChanged(activeClassesCount);
-            }
+
+
 
 
 
@@ -229,6 +233,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 Log.e("classe time", classes.getDaysTime().toString());
                 List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
                 textViewTime.setText("Class at " + listDaysTime.get(indexTime) + " today!");
+
             } catch (Exception er) {
                 er.printStackTrace();
             }
@@ -347,6 +352,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
        // Update();
 
 
+
         return view;
     }
 
@@ -449,20 +455,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         notifyDataSetChanged();
     }
 
-    public void Update(){
-        TextView txtView = (TextView) ((MainActivity)context).findViewById(R.id.textViewRemainingClasses);
-        txtView.setText(String.valueOf(activeClassesCount)+" Classes Remaining");
-    }
 
-    public interface OnDataChangeListener{
-        public void onDataChanged(int size);
-    }
-   // and add a setter for the listener (also in the adapter)
-
-    OnDataChangeListener mOnDataChangeListener;
-    public void setOnDataChangeListener(OnDataChangeListener onDataChangeListener){
-        mOnDataChangeListener = onDataChangeListener;
-    }
 
 
 }

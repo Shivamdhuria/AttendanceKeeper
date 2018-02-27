@@ -2,8 +2,10 @@ package com.elixer.attendancekeeper;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,MyCallBack {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     //a List of type hero for holding list items
     List<Class> classList;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     //For Current Date in Text View
     TextView textViewCurrentDate;
     TextView textViewRemainingClasses;
-    MyCallBack myCallBack;
+
     ListViewAdapter adapter;
 
     @Override
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+        registerReceiver(broadcastReceiver, new IntentFilter("Updating"));
 
         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -233,22 +236,21 @@ public class MainActivity extends AppCompatActivity
         BeginService();
         //attaching adapter to the listview
         listView.setAdapter(adapter);
-        adapter.setOnDataChangeListener(new ListViewAdapter.OnDataChangeListener() {
-            @Override
-            public void onDataChanged(int size) {
-                textViewRemainingClasses.setText(String.valueOf(size+" Class Remaing"));
-            }
-        });
+
     }
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String val = intent.getStringExtra("size");
+            textViewRemainingClasses.setText(val);
+            Log.e("Val............",val);
+
+        }
+    };
 
 
 
-    @Override
-    public void updateMyText(int value) {
-        TextView txtView = (TextView)findViewById(R.id.textViewRemainingClasses);
-        txtView.setText(value);
-    }
-    //Function to update TextView Classes Today
+
 
 
 

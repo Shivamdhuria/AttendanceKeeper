@@ -14,8 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Run extends IntentService {
 
@@ -25,6 +27,7 @@ public class Run extends IntentService {
     List<Class> classList;
     Class classes;
     int indexTime;
+    private Set<String> active =new HashSet<String>();
 
     // Must create a default constructor
     public Run() {
@@ -129,6 +132,9 @@ public class Run extends IntentService {
                     List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
                     Log.e("Alame name and time","Class at " + listDaysTime.get(indexTime) + " today!   :"+classes.getName());
                     setAlarm(classes.getName(),listDaysTime.get(indexTime));
+                    active.add(classes.getName());
+
+
 
                 } catch (Exception er) {
                     er.printStackTrace();
@@ -138,6 +144,7 @@ public class Run extends IntentService {
 
 
         }
+        updateTextview(active.size());
 
 
     }
@@ -180,5 +187,13 @@ public class Run extends IntentService {
 
         }
 
+    }
+
+    void updateTextview(int size){
+
+        final String BROADCAST_ACTION = "Update";
+        Intent intent = new Intent(BROADCAST_ACTION);
+        intent.putExtra("size",size);
+        sendBroadcast(intent);
     }
 }
