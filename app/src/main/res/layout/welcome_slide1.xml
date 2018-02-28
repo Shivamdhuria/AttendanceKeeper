@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundgrey">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,13 +16,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/logo" />
+            android:src="@drawable/welcome" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Attendance Keeper"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             android:fontFamily="serif"
@@ -34,9 +34,9 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Keep count of your attendance in a easy and interctive way"
+            android:text="Keep count of your attendance in an easy and interactive way"
             android:textAlignment="center"
-            android:textColor="?android:attr/textColorTertiary"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>
