@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="30dp">
 
                     <EditText
                         android:layout_width="60dp"
@@ -171,21 +171,21 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         app:fabSize="mini"
-                        app:srcCompat="@drawable/plus"
-                        android:id="@+id/buttonAddCurrent"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/editTextCurrent"
-                        app:backgroundTint="@color/colorAccentOpposite" />
+                        app:srcCompat="@drawable/minus"
+                        android:layout_alignParentTop="true"
+                        android:layout_toStartOf="@+id/editTextCurrent"
+                        android:id="@+id/buttonMinusCurrent" />
 
                     <android.support.design.widget.FloatingActionButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         app:fabSize="mini"
-                        app:srcCompat="@drawable/minus"
+                        app:srcCompat="@drawable/plus"
+                        android:id="@+id/buttonAddCurrent"
+                        app:backgroundTint="@color/colorAccentOpposite"
                         android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/editTextCurrent"
-                        android:id="@+id/buttonMinusCurrent" />
+                        android:layout_toEndOf="@+id/editTextCurrent" />
 
 
                 </RelativeLayout>
