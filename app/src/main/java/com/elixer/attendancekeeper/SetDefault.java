@@ -51,6 +51,9 @@ public class SetDefault extends AppCompatActivity {
         //scrollView = (ScrollView)findViewById(R.id.scrollview);
         arcView = (DecoView)findViewById(R.id.dynamicArcView);
 
+
+        edittextTotal.setText("75");
+        edittextCurrent.setText("5");
         //Fill editText if saved
         getSavedValues();
 
@@ -292,12 +295,17 @@ public class SetDefault extends AppCompatActivity {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             int p= preferences.getInt("percentage",0);
             int t=preferences.getInt("time",0);
-            edittextTotal.setText(String.valueOf( p));
-            edittextCurrent.setText(String.valueOf(t));
-            percentage=p;
+            if(p==0 && t==0){
+                edittextTotal.setText("75");
+                edittextCurrent.setText("5");
+
+            }else {
+                edittextTotal.setText(String.valueOf(p));
+                edittextCurrent.setText(String.valueOf(t));
+                percentage = p;
+            }
         }catch (Exception ex){
-            edittextTotal.setText("75");
-            edittextCurrent.setText("5");
+
 
         }
 

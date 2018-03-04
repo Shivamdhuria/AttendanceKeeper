@@ -16,12 +16,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:layout_alignParentStart="true">
 
         <TextView
-            android:text="Let's Get you Started..."
+            android:text="Set Defaults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -29,7 +29,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorTertiary"
-            android:textSize="24sp"
+            android:textSize="30sp"
             android:fontFamily="serif"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
@@ -70,7 +70,7 @@
             android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0.63">
+            android:layout_weight="0.99">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -97,7 +97,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="30dp"
                     android:paddingTop="10dp">
 
                     <EditText
@@ -190,16 +190,15 @@
 
                 </RelativeLayout>
 
+                <Button
+                    android:text="Save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_save" />
+
             </LinearLayout>
 
         </RelativeLayout>
-
-        <Button
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_save"
-            android:layout_marginTop="40dp" />
 
 
     </LinearLayout>
