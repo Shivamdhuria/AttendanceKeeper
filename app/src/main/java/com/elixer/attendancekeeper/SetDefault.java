@@ -2,15 +2,17 @@ package com.elixer.attendancekeeper;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class SetDefault extends AppCompatActivity {
     String className;
     EditText edittextCurrent, edittextTotal;
     FloatingActionButton buttonAddTotal, buttonMinusTotal, buttonAddCurrent, buttonMinusCurrent;
+    Button buttonSave;
 
 
     float percentage;
@@ -43,9 +46,13 @@ public class SetDefault extends AppCompatActivity {
         buttonMinusTotal = (FloatingActionButton) findViewById(R.id.buttonMinusTotal);
         buttonAddCurrent = (FloatingActionButton) findViewById(R.id.buttonAddCurrent);
         buttonMinusCurrent = (FloatingActionButton) findViewById(R.id.buttonMinusCurrent);
+        buttonSave=(Button)findViewById(R.id.button_save) ;
 
         //scrollView = (ScrollView)findViewById(R.id.scrollview);
         arcView = (DecoView)findViewById(R.id.dynamicArcView);
+
+        //Fill editText if saved
+        getSavedValues();
 
 
 
@@ -162,22 +169,39 @@ public class SetDefault extends AppCompatActivity {
             }
         });
 
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (edittextTotal.getText().toString().equals("")) {
+                    Snackbar.make(view, "Percentage Criteria Empty", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else if (edittextCurrent.getText().toString().equals("")) {
+                    Snackbar.make(view, "Enter Time in Minures,", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+
+                    saveInSharedPreference();
+                    Intent mainActivityIntent = new Intent(getApplication(),MainActivity.class);
+                    startActivity(mainActivityIntent);
+                    finish();
+
+
+
+                }
+            }
+        });
+
 
     }
 
+    private void saveInSharedPreference() {
 
-
-    private void saveinsharedpref(Class newclass) {
-
-
-
-        SharedPreferences sharedPref = getSharedPreferences("attend", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        editor.commit();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("percentage",Integer.valueOf(edittextTotal.getText().toString()));
+        editor.putInt("time",Integer.valueOf(edittextCurrent.getText().toString()));
+        editor.apply();
     }
-
-    // create an action bar button
 
 
 
@@ -261,15 +285,19 @@ public class SetDefault extends AppCompatActivity {
         });
     }
 
-    public void getSavedValuees(){
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("default", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+    public void getSavedValues(){
+
         try {
 
-            editor.get
-            editor.commit();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int p= preferences.getInt("percentage",0);
+            int t=preferences.getInt("time",0);
+            edittextTotal.setText(String.valueOf( p));
+            edittextCurrent.setText(String.valueOf(t));
+            percentage=p;
         }catch (Exception ex){
-
+            edittextTotal.setText("75");
+            edittextCurrent.setText("5");
 
         }
 

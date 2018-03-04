@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     //For Current Date in Text View
     TextView textViewCurrentDate;
     TextView textViewRemainingClasses;
+    static int defaultTime,defaultPercentage;
 
     ListViewAdapter adapter;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         textViewCurrentDate = (TextView) findViewById(R.id.textviewDate);
         textViewRemainingClasses=(TextView)findViewById(R.id.textViewRemainingClasses);
         textViewRemainingClasses.setText("lol");
-
+        findAndSaveDefaults();
 
 
         registerReceiver(broadcastReceiver, new IntentFilter("Updating"));
@@ -113,6 +115,28 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void findAndSaveDefaults() {
+
+
+
+
+            try {
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                defaultPercentage= preferences.getInt("percentage",0);
+                defaultTime=preferences.getInt("time",0);
+
+            }catch (Exception ex){
+                defaultPercentage = 75;
+                defaultTime=5;
+
+
+
+
+            }
+
     }
 
     private String getDate() {

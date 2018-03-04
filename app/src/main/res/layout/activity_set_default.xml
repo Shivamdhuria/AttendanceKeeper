@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:id="@+id/title"
+            android:id="@+id/className"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorTertiary"
@@ -81,7 +81,7 @@
                 android:layout_alignParentStart="true">
 
                 <TextView
-                    android:text="Attendance Criteria"
+                    android:text="Attendance Criteria(in %)"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
@@ -137,7 +137,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:text="Alarm/Reminder time prior to classes"
+                    android:text="Reminder/Alarm time prior to class(in minutes)"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView5"
@@ -159,7 +159,7 @@
                         android:inputType="number"
                         android:ems="10"
                         android:id="@+id/editTextCurrent"
-                        android:text="0"
+                        android:text="5"
                         android:textAlignment="center"
                         android:textColor="?android:attr/textColorTertiary"
                         android:layout_alignParentTop="true"
@@ -195,10 +195,10 @@
         </RelativeLayout>
 
         <Button
-            android:text="Button"
+            android:text="Save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/button_save"
             android:layout_marginTop="40dp" />
 
 

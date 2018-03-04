@@ -342,7 +342,7 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         final SeriesItem seriesItem1;
 
 
-        if (percentage > 75.00) {
+        if (percentage > MainActivity.defaultPercentage) {
             //Create data series track
             seriesItem1 = new SeriesItem.Builder(Color.argb(255, 79, 196, 0))
 

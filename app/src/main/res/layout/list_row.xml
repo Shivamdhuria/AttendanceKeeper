@@ -22,7 +22,7 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -49,8 +49,8 @@
 
         android:paddingTop="10dp"
         android:padding="100dp"
-        android:layout_below="@+id/title"
-        android:layout_alignEnd="@+id/title"
+        android:layout_below="@+id/className"
+        android:layout_alignEnd="@+id/className"
         android:layout_alignParentStart="true" />
 
     <Switch
