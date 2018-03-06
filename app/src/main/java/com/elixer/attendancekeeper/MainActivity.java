@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
                 String day =convertToDay(dateClicked);
                 Intent timeTableIntent = new Intent(getApplicationContext(),TimeTable.class);
                 timeTableIntent.putExtra("day",day);
-                timeTableIntent.putExtra("date",String.valueOf(dateClicked));
+                timeTableIntent.putExtra("date",convertToDate(dateClicked));
                 startActivity(timeTableIntent);
             }
 
@@ -151,6 +151,13 @@ public class MainActivity extends AppCompatActivity
         return dayOfTheWeek;
     }
 
+    private String convertToDate(Date dateClicked) {
+
+        String date = (String) DateFormat.format("EEEE", dateClicked)+" , "+ (String) DateFormat.format("dd", dateClicked)
+        +" "+(String) DateFormat.format("MMMM",  dateClicked);// Thursd
+      //  Log.e("Date......",dayOfTheWeek);
+        return date;
+    }
 
     private void findAndSaveDefaults() {
 
@@ -266,6 +273,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
     public void fetchAllPreference(){

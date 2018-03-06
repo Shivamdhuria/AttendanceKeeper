@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,25 +25,24 @@ public class TimeTable extends AppCompatActivity {
     //the listview
     ListView listViewTable;
     ListViewAdapterTimeTable adapterTime;
-
+    String day;
+   // TextView textViewDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         Intent intent=getIntent();
-        String day =intent.getStringExtra("day");
-        Log.e(">.......",day);
-
-
-
-
+        String date =intent.getStringExtra("date");
+        day = intent.getStringExtra("day");
+        //Log.e(">.......",day);
+         TextView textViewDateDisplay =(TextView)findViewById(R.id.textViewDateDisplay);
         listViewTable = (ListView)findViewById(R.id.listViewTable);
 
 
-        textviewTitle =(TextView)findViewById(R.id.textviewDate);
 
-        textviewTitle.setText("pppppppp");
+
+        textViewDateDisplay.setText(date);
         classList = new ArrayList<>();
         try{
            fetchAllPreference();
@@ -57,8 +55,8 @@ public class TimeTable extends AppCompatActivity {
 
 
     }
-    public void fetchAllPreference(){
-        SharedPreferences prefA =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
+    public void fetchAllPreference() {
+        SharedPreferences prefA = getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
         Map<String, ?> allEntries = prefA.getAll();
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
 
@@ -70,18 +68,29 @@ public class TimeTable extends AppCompatActivity {
 
             /** Print one variable to the console */
             // System.out.println("Username : " + classes.getName());
-            classList.add(classes);
+            //Load the list into a hashSet
+            List<String> listDays = new ArrayList<String>(classes.getDays());
+            for (String string : listDays) {
+                if (string.matches(day)) {
+                    // Log.e("BOOOLEAN","FOUND");
 
 
-            //Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
+                    classList.add(classes);
+
+
+                }
+
+
+                //Toast.makeText(getApplicationContext(),(entry.getKey() + ": " + entry.getValue().toString()),Toast.LENGTH_LONG).show();
+            }
+
+            //creating the adapter
+            adapterTime = new ListViewAdapterTimeTable(this, R.layout.list_row_timetable, classList);
+
+            //attaching adapter to the listview
+            listViewTable.setAdapter(adapterTime);
+
         }
-
-        //creating the adapter
-        adapterTime = new ListViewAdapterTimeTable(this,R.layout.list_row_timetable,classList);
-
-        //attaching adapter to the listview
-        listViewTable.setAdapter(adapterTime);
-
     }
 
     @Override
@@ -106,4 +115,6 @@ public class TimeTable extends AppCompatActivity {
         String formattedDate = df.format(c);
         return formattedDate;
     }
+
+
 }

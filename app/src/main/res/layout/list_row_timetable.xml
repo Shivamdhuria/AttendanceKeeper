@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
+    android:background="?android:attr/windowBackground"
     android:orientation="horizontal"
     android:padding="10dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:layout_margin="15dp"
     android:layout_marginBottom="30dp"
-    android:elevation="3dp"
+    android:elevation="0dp"
     android:paddingBottom="10dp">
 
 
@@ -163,7 +163,8 @@
         android:layout_below="@+id/textView10"
         android:layout_toStartOf="@+id/relativeLayout4"
         android:id="@+id/textViewTime"
-        android:layout_marginTop="3dp" />
+        android:layout_marginTop="3dp"
+        android:visibility="invisible" />
 
     <Button
         android:text="Off"

@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,7 +61,7 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
     ArrayList<String> daysTime;
 
     TextView textViewClassNumber;
-    Button buttonPresent,buttonOff,buttonAbsent;
+
 
     int activeClassesCount=0;
     private Set<String> active =new HashSet<String>();
@@ -100,9 +99,7 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         //textViewClassNumber=view.findViewById(R.id.textviewClassNumber);
         TextView textViewTime = view.findViewById(R.id.textViewTime);
         DecoView arcView = (DecoView) view.findViewById(R.id.dynamicArcView);
-        buttonAbsent = view.findViewById(R.id.button_absent);
-        buttonPresent = view.findViewById(R.id.button_present);
-        buttonOff = view.findViewById(R.id.button_off);
+
         views = view.findViewById(R.id.view);
         viewTitle = view.findViewById(R.id.viewTitle);
         String today = getDate();
@@ -215,95 +212,22 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         Boolean found = searchDay(today);
         //   Log.e("BOOOLEAN",found.toString());
         if (found) {
-            //   Log.e("INVI","INVIIIII");
-            buttonAbsent.setVisibility(View.VISIBLE);
-            buttonPresent.setVisibility(View.VISIBLE);
-            buttonOff.setVisibility(View.VISIBLE);
-            views.setVisibility(View.VISIBLE);
-            // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
-
-
-
-
 
             try {
                 Log.e("classe time", classes.getDaysTime().toString());
                 List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
-                textViewTime.setText("Class at " + listDaysTime.get(indexTime) + " today!");
+                textViewTime.setText("Class at " + listDaysTime.get(indexTime) );
 
             } catch (Exception er) {
                 er.printStackTrace();
             }
 
-            //setting  notifications
-            //  setAlarm();
 
-        }
-
-        //Displaying Number of Active Classes in TextView
-
-
-        if(classes.getUpdate()==1){
-            buttonInvisible();
-            views.setVisibility(View.GONE);
 
         }
 
 
-//         textViewClassNumber.setText(String.valueOf(activeClassesCount)+ " classes today.");
-        //Buttons initialised here
-        buttonPresent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                classes = classList.get(position);
-                int current = classes.getCurrent();
-                int total = classes.getTotal();
-                current = current + 1;
-                total = total + 1;
-                classes.setCurrent(current);
-                classes.setTotal(total);
-                cancelReminder(classes.getName());
-                saveinsharedpref(classes);
-                buttonInvisible();
-                classes.setUpdate(1);
-                saveinsharedpref(classes);
-                // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
-            }
-        });
 
-        buttonAbsent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                classes = classList.get(position);
-                int current = classes.getCurrent();
-                int total = classes.getTotal();
-                // current = current+1;
-                total = total + 1;
-                // classes.setCurrent(current);
-                classes.setTotal(total);
-                cancelReminder(classes.getName());
-                saveinsharedpref(classes);
-                buttonInvisible();
-                classes.setUpdate(1);
-                saveinsharedpref(classes);
-                // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
-            }
-        });
-
-        buttonOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                classes = classList.get(position);
-                int current = classes.getCurrent();
-                int total = classes.getTotal();
-                cancelReminder(classes.getName());
-
-                saveinsharedpref(classes);
-                buttonInvisible();
-                classes.setUpdate(1);
-                saveinsharedpref(classes);
-            }
-        });
 
         //If switch clicked
         status.setOnClickListener(new View.OnClickListener() {
@@ -353,17 +277,9 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         return view;
     }
 
-    private void buttonInvisible() {
-        {
-            buttonAbsent.setVisibility(View.GONE);
-            buttonOff.setVisibility(View.GONE);
-            buttonPresent.setVisibility(View.GONE);
-            viewTitle.setBackgroundColor(Color.parseColor("#dedede"));
-            Log.e("INVI..","invvv");
-        }
 
 
-    }
+
 
     private void cancelReminder(String name) {
 
@@ -435,6 +351,8 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         //  Log.e("dayyyy",dayOfTheWeek);
         return dayOfTheWeek;
     }
+
+
 
     private void saveinsharedpref(Class newclass) {
 
