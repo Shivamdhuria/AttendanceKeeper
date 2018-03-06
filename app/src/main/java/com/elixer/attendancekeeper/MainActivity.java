@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -51,10 +54,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
        // TextView textView = (TextView)findViewById(R.id.textviewClassNumber);
+        //Generating text View
+        final CompactCalendarView compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
 
         //initializing listview
         //initializing objects
@@ -88,6 +94,27 @@ public class MainActivity extends AppCompatActivity
         //Setting Current Date
         textViewCurrentDate.setText(getDate());
 
+        //On click Date button
+        compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+            @Override
+            public void onDayClick(Date dateClicked) {
+                List<Event> events = compactCalendarView.getEvents(dateClicked);
+                Log.d(".............", "Day was clicked: " + dateClicked + " with events " + events);
+                String day =convertToDay(dateClicked);
+                Intent timeTableIntent = new Intent(getApplicationContext(),TimeTable.class);
+                timeTableIntent.putExtra("day",day);
+                timeTableIntent.putExtra("date",String.valueOf(dateClicked));
+                startActivity(timeTableIntent);
+            }
+
+
+
+            @Override
+            public void onMonthScroll(Date firstDayOfNewMonth) {
+                Log.d("..........", "Month was scrolled to: " + firstDayOfNewMonth);
+            }
+        });
+
 
 
 
@@ -116,6 +143,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    private String convertToDay(Date dateClicked) {
+
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", dateClicked); // Thursd
+        Log.e("Date......",dayOfTheWeek);
+        return dayOfTheWeek;
+    }
+
 
     private void findAndSaveDefaults() {
 

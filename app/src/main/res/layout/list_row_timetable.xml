@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_margin="15dp"
+    android:layout_marginBottom="30dp"
+    android:elevation="3dp"
+    android:paddingBottom="10dp">
+
+
+
+    <!-- Title Of Song-->
+
+    <!-- Artist Name -->
+
+
+    <TextView
+        android:id="@+id/className"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Class Name"
+
+        android:typeface="sans"
+        android:textSize="24sp"
+        android:fontFamily="serif"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="?android:attr/textColorTertiary" />
+
+    <!-- Rightend Duration -->
+
+    <View
+        android:layout_width="10dp"
+
+        android:layout_height="2dp"
+        android:background="#dedede"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/viewTitle"
+        android:alpha="150"
+
+        android:paddingTop="10dp"
+        android:padding="100dp"
+        android:layout_below="@+id/className"
+        android:layout_alignEnd="@+id/className"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="#343434"
+        android:textSize="12sp"
+
+        android:text="23/30"
+        android:padding="0dp"
+        android:paddingRight="0dp"
+        android:layout_alignBaseline="@+id/textView10"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_toEndOf="@+id/textView10" />
+
+    <Button
+        android:text="Absent"
+        android:theme="@style/PrimaryFlatButton"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_absent"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:background="@android:color/white"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/view"
+        android:layout_toStartOf="@+id/button_present"
+        android:layout_alignBottom="@+id/button_present" />
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/relative"
+        android:layout_below="@+id/status"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:text="64%"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewPercentage"
+            android:textAlignment="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <com.hookedonplay.decoviewlib.DecoView
+            android:id="@+id/dynamicArcView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:paddingRight="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorGreyText"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/view"
+        android:visibility="gone"
+        android:alpha="150"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/relative"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Present"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_present"
+        android:theme="@style/PrimaryFlatButton"
+        android:visibility="gone"
+
+        android:textSize="14sp"
+        android:padding="0dp"
+        android:background="@android:color/white"
+        android:textColor="@color/colorAccentOpposite"
+
+        android:layout_below="@+id/view"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Attendance:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:textSize="12sp"
+        android:layout_below="@+id/viewTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:text="No class for today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_toStartOf="@+id/relativeLayout4"
+        android:id="@+id/textViewTime"
+        android:layout_marginTop="3dp" />
+
+    <Button
+        android:text="Off"
+
+        android:theme="@style/PrimaryFlatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_off"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:background="@android:color/white"
+        android:textColor="?android:attr/textColorTertiary"
+
+        android:layout_alignBaseline="@+id/button_absent"
+        android:layout_alignBottom="@+id/button_absent"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>
+

@@ -34,13 +34,10 @@ import java.util.Set;
 import static android.content.Context.ALARM_SERVICE;
 
 /**
- * Created by Admin on 1/22/2018.
+ * Created by Admin on 3/6/2018.
  */
 
-public class ListViewAdapter extends ArrayAdapter<Class>  {
-
-
-
+public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
 
     //the list values in the List of type hero
     List<Class> classList;
@@ -73,7 +70,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 
 
     //constructor initializing the values
-    public ListViewAdapter(Context context, int resource, List<Class> classList) {
+    public ListViewAdapterTimeTable(Context context, int resource, List<Class> classList) {
         super(context, resource, classList);
         this.context = context;
         this.resource = resource;
@@ -103,7 +100,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         //textViewClassNumber=view.findViewById(R.id.textviewClassNumber);
         TextView textViewTime = view.findViewById(R.id.textViewTime);
         DecoView arcView = (DecoView) view.findViewById(R.id.dynamicArcView);
-         buttonAbsent = view.findViewById(R.id.button_absent);
+        buttonAbsent = view.findViewById(R.id.button_absent);
         buttonPresent = view.findViewById(R.id.button_present);
         buttonOff = view.findViewById(R.id.button_off);
         views = view.findViewById(R.id.view);
@@ -114,7 +111,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 
         //To Keep track of active Classes
 
-       // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
+        // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
 
 
         //  final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
@@ -137,7 +134,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 //        Log.e("per", String.valueOf(classes.getCurrent() / classes.getTotal()));
         float percentage;
         try {
-           percentage = (classes.getCurrent() * 100) / classes.getTotal();
+            percentage = (classes.getCurrent() * 100) / classes.getTotal();
         }catch (ArithmeticException ex){
             percentage=0;
         }
@@ -223,7 +220,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
             views.setVisibility(View.VISIBLE);
-           // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
+            // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
 
 
 
@@ -270,7 +267,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
-               // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
+                // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
             }
         });
 
@@ -289,7 +286,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
-               // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
+                // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
             }
         });
 
@@ -349,7 +346,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 editor.commit();
             }
         });
-       // Update();
+        // Update();
 
 
 
@@ -390,12 +387,12 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         calendar.set(Calendar.SECOND, 0);
 
         Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
-       // Log.e("Setting Alarm",calendar.toString());
+        // Log.e("Setting Alarm",calendar.toString());
 
 //This is alarm manager
-      //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
         //calendar.setTimeInMillis(time);
-      //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -432,10 +429,10 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 
     private String getDate() {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE");
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
-      //  Log.e("dayyyy",dayOfTheWeek);
+        //  Log.e("dayyyy",dayOfTheWeek);
         return dayOfTheWeek;
     }
 
@@ -450,12 +447,9 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         editor.putString(newclass.name,newClass);
         //update in listview
         editor.commit();
-       // textViewCurrent.setText(Integer.toString(classes.getCurrent()));
-       // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
+        // textViewCurrent.setText(Integer.toString(classes.getCurrent()));
+        // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         notifyDataSetChanged();
     }
-
-
-
 
 }

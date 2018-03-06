@@ -47,25 +47,25 @@ public class SelectDay extends AppCompatActivity {
                 );
 
                 if(monday.isChecked()){
-                    arrayList.set(0, "Mon");
+                    arrayList.set(0, "Monday");
                 }
                 if(tuesday.isChecked()){
-                    arrayList.set(1, "Tue");
+                    arrayList.set(1, "Tuesday");
                 }
                 if(wednesday.isChecked()){
-                    arrayList.set(2, "Wed");
+                    arrayList.set(2, "Wednesday");
                 }
                 if(thursday.isChecked()){
-                    arrayList.set(3, "Thu");
+                    arrayList.set(3, "Thursday");
                 }
                 if(friday.isChecked()){
-                    arrayList.set(4, "Fri");
+                    arrayList.set(4, "Friday");
                 }
                 if(saturday.isChecked()){
-                    arrayList.set(5,"Sat");
+                    arrayList.set(5,"Saturday");
                 }
                 if(sunday.isChecked()){
-                    arrayList.set(6, "Sun");
+                    arrayList.set(6, "Sunday");
                 }
 
                 //Compare to see if null

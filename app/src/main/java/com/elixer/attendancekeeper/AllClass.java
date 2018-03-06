@@ -90,8 +90,6 @@ public class AllClass extends AppCompatActivity {
 
         }
 
-        //creating the adapter
-      //  ListViewAdapter adapterAllClass = new ListViewAdapter(this, android.R.layout.simple_list_item_1, allClassList);
 
         // Create an ArrayAdapter from List
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
