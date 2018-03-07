@@ -23,6 +23,7 @@ public class SelectDay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_day);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         arrayList = new ArrayList<>(
                 Arrays.asList("null","null","null","null","null","null","null")

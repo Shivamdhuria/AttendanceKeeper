@@ -22,10 +22,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:paddingTop="20dp"
-        android:paddingBottom="40dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         android:fontFamily="serif-monospace"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@android:color/white" />
 
     <ListView

@@ -16,6 +16,8 @@ public class SelectPriorities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_priorities);
 
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
         checkReminder = (CheckBox)findViewById(R.id.check_box_reminder);
         checkAlarm=(CheckBox)findViewById(R.id.check_box_alarm);
         buttonSubmit=(Button)findViewById(R.id.button_submit);
@@ -47,6 +49,7 @@ public class SelectPriorities extends AppCompatActivity {
                 //Set up a Dialog Box here
                 Intent intentCurrentAttendance = new Intent(getApplication(),CurrentAttendance.class);
                 startActivity(intentCurrentAttendance);
+                finish();
             }
         });
 

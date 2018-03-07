@@ -53,7 +53,7 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
     TextView textActivity2;
     Boolean check;
     Class classes;
-    TextView textViewCurrent,textViewTotal;
+    TextView textViewCurrent,textViewTotal,textViewAvail;
     DecoView arcView;
     View views;
     View viewTitle;
@@ -96,6 +96,7 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
+        textViewAvail=view.findViewById(R.id.textViewAvail);
         //textViewClassNumber=view.findViewById(R.id.textviewClassNumber);
         TextView textViewTime = view.findViewById(R.id.textViewTime);
         DecoView arcView = (DecoView) view.findViewById(R.id.dynamicArcView);
@@ -168,7 +169,8 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
                     .setSpinDuration(800)
                     .build();
         }
-
+        //Textview
+        availBunks();
 
         int series1Index = arcView.addSeries(seriesItem1);
 
@@ -368,6 +370,32 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         // textViewCurrent.setText(Integer.toString(classes.getCurrent()));
         // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         notifyDataSetChanged();
+    }
+
+    private void availBunks() {
+        int classesRequired = classes.getTotal() * 75 / 100;
+        if (classes.getCurrent() >= classesRequired) {
+            textViewAvail.setTextColor(Color.argb(255, 79, 196, 0));
+            String plural ;
+            if(classes.getCurrent() - classesRequired==1){
+                plural = "Bunk";
+            }else{
+                plural="Bunks";
+            }
+            textViewAvail.setText(classes.getCurrent() - classesRequired + " " +plural+ " Available");
+        } else {
+            textViewAvail.setTextColor(Color.RED);
+            String single;
+            if(classes.getCurrent() - classesRequired==1){
+                single = "Class";
+            }else{
+                single="Classes";
+            }
+            textViewAvail.setText(classesRequired - classes.getCurrent() + " "+ single+ " Short");
+
+        }
+
+
     }
 
 }

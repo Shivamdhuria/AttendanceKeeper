@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +38,13 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
     CheckBox checkboxAlarm, checkboxReminder;
     float percentage;
     DecoView arcView;
+    ImageButton imageButtonDelete;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_description_and_settings);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         intentReceived = getIntent();
         className = intentReceived.getStringExtra("classname");
@@ -53,6 +56,7 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         buttonMinusTotal = (FloatingActionButton) findViewById(R.id.buttonMinusTotal);
         buttonAddCurrent = (FloatingActionButton) findViewById(R.id.buttonAddCurrent);
         buttonMinusCurrent = (FloatingActionButton) findViewById(R.id.buttonMinusCurrent);
+        imageButtonDelete = (ImageButton)findViewById(R.id.imageButtonDelete);
         checkboxAlarm = (CheckBox) findViewById(R.id.check_box_alarm);
         checkboxReminder = (CheckBox) findViewById(R.id.check_box_reminder);
         //scrollView = (ScrollView)findViewById(R.id.scrollview);
@@ -127,6 +131,12 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
                 decoRefresh(view);
 
 
+            }
+        });
+        imageButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BuildDialogBox();
             }
         });
         checkboxAlarm.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +234,8 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
 
 
     }
+
+
 
     private void getClassByName(String className) {
 

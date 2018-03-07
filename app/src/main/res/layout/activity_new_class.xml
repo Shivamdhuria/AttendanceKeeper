@@ -33,7 +33,7 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:hint="Science 101"
-        android:inputType="textCapSentences"
+        android:inputType="textCapWords"
         android:textColorHint="#B2AAB2"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"

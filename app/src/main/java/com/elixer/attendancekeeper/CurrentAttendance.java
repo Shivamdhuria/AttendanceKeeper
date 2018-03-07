@@ -61,7 +61,7 @@ public class CurrentAttendance extends AppCompatActivity {
         buttonMinusCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) - 1));
+                editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextCurrent.getText().toString()) - 1));
 
 
             }

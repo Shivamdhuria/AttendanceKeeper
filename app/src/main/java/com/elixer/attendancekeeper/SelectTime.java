@@ -32,6 +32,7 @@ public class SelectTime extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_time);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
      //   SelectDay.arrayList;
         relativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout);
         gridLayout = (GridLayout)findViewById(R.id.daysLayout);

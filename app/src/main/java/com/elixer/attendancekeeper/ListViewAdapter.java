@@ -37,9 +37,7 @@ import static android.content.Context.ALARM_SERVICE;
  * Created by Admin on 1/22/2018.
  */
 
-public class ListViewAdapter extends ArrayAdapter<Class>  {
-
-
+public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
     //the list values in the List of type hero
@@ -49,15 +47,13 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
     Context context;
 
 
-
-
     //the layout resource file for the list items
     int resource;
 
     TextView textActivity2;
     Boolean check;
     Class classes;
-    TextView textViewCurrent,textViewTotal;
+    TextView textViewCurrent, textViewTotal, textViewAvail;
     DecoView arcView;
     View views;
     View viewTitle;
@@ -65,11 +61,10 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
     ArrayList<String> daysTime;
 
     TextView textViewClassNumber;
-    Button buttonPresent,buttonOff,buttonAbsent;
+    Button buttonPresent, buttonOff, buttonAbsent;
 
-    int activeClassesCount=0;
-    private Set<String> active =new HashSet<String>();
-
+    int activeClassesCount = 0;
+    private Set<String> active = new HashSet<String>();
 
 
     //constructor initializing the values
@@ -100,10 +95,11 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         Switch status = view.findViewById(R.id.status);
         TextView textViewName = view.findViewById(R.id.className);
         textViewCurrent = view.findViewById(R.id.attendance);
+        textViewAvail = view.findViewById(R.id.textViewAvail);
         //textViewClassNumber=view.findViewById(R.id.textviewClassNumber);
         TextView textViewTime = view.findViewById(R.id.textViewTime);
         DecoView arcView = (DecoView) view.findViewById(R.id.dynamicArcView);
-         buttonAbsent = view.findViewById(R.id.button_absent);
+        buttonAbsent = view.findViewById(R.id.button_absent);
         buttonPresent = view.findViewById(R.id.button_present);
         buttonOff = view.findViewById(R.id.button_off);
         views = view.findViewById(R.id.view);
@@ -114,7 +110,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 
         //To Keep track of active Classes
 
-       // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
+        // textViewClassNumber = view.findViewById(R.id.textViewClassCount);
 
 
         //  final TextView textPercentage = (TextView) view.findViewById(R.id.textViewPercentage);
@@ -129,17 +125,15 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         textViewName.setText(classes.getName());
 
         textViewCurrent.setText(" " + Integer.toString(classes.getCurrent()) + "/" + Integer.toString(classes.getTotal()));
-        //  textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
-        // Create background track
-        //
-        //
+        //Set textview
+        availBunks();
         Log.e("curent ", String.valueOf(classes.getCurrent()) + "      " + String.valueOf(classes.getTotal()));
 //        Log.e("per", String.valueOf(classes.getCurrent() / classes.getTotal()));
         float percentage;
         try {
-           percentage = (classes.getCurrent() * 100) / classes.getTotal();
-        }catch (ArithmeticException ex){
-            percentage=0;
+            percentage = (classes.getCurrent() * 100) / classes.getTotal();
+        } catch (ArithmeticException ex) {
+            percentage = 0;
         }
 
 
@@ -154,7 +148,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         final SeriesItem seriesItem1;
 
 
-        if (percentage > MainActivity.defaultPercentage) {
+        if (percentage >= MainActivity.defaultPercentage) {
             //Create data series track
             seriesItem1 = new SeriesItem.Builder(Color.argb(255, 79, 196, 0))
 
@@ -223,10 +217,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
             buttonPresent.setVisibility(View.VISIBLE);
             buttonOff.setVisibility(View.VISIBLE);
             views.setVisibility(View.VISIBLE);
-           // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
-
-
-
+            // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
 
 
             try {
@@ -246,7 +237,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         //Displaying Number of Active Classes in TextView
 
 
-        if(classes.getUpdate()==1){
+        if (classes.getUpdate() == 1) {
             buttonInvisible();
             views.setVisibility(View.GONE);
 
@@ -270,7 +261,8 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
-               // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
+                availBunks();
+                // viewTitle.setBackgroundColor(Color.parseColor("@color/colorAccentOpposite"));
             }
         });
 
@@ -289,7 +281,8 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
-               // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
+                availBunks();
+                // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
             }
         });
 
@@ -305,6 +298,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 buttonInvisible();
                 classes.setUpdate(1);
                 saveinsharedpref(classes);
+                availBunks();
             }
         });
 
@@ -349,8 +343,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
                 editor.commit();
             }
         });
-       // Update();
-
+        // Update();
 
 
         return view;
@@ -362,7 +355,7 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
             buttonOff.setVisibility(View.GONE);
             buttonPresent.setVisibility(View.GONE);
             viewTitle.setBackgroundColor(Color.parseColor("#dedede"));
-            Log.e("INVI..","invvv");
+            Log.e("INVI..", "invvv");
         }
 
 
@@ -372,10 +365,10 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         int hashcode = name.hashCode();
-        Log.e("Cancell, Alarm","cancelling....."+ name);
+        Log.e("Cancell, Alarm", "cancelling....." + name);
         //Intent myIntent = new Intent(getContext(),NotificationPublisher.class);
-        Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent notificationMessage = new Intent(getContext(), NotificationPublisher.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), hashcode, notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
         pendingIntent.cancel();
 
         alarmManager.cancel(pendingIntent);
@@ -389,13 +382,13 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         calendar.set(Calendar.MINUTE, 26);
         calendar.set(Calendar.SECOND, 0);
 
-        Intent notificationMessage = new Intent(getContext(),NotificationPublisher.class);
-       // Log.e("Setting Alarm",calendar.toString());
+        Intent notificationMessage = new Intent(getContext(), NotificationPublisher.class);
+        // Log.e("Setting Alarm",calendar.toString());
 
 //This is alarm manager
-      //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
+        //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
         //calendar.setTimeInMillis(time);
-      //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        //  AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
@@ -403,22 +396,20 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
                 + (20 * 1000), pendingIntent);
-        Toast.makeText(getContext(),"Alarm sent",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Alarm sent", Toast.LENGTH_SHORT).show();
     }
 
     private Boolean searchDay(String today) {
-        Boolean val=false;
+        Boolean val = false;
 
         //Load the list into a hashSet
-        List <String> listDays = new ArrayList<String>(classes.getDays());
-        for (String string : listDays)
-        {
-            if(string.matches(today)){
+        List<String> listDays = new ArrayList<String>(classes.getDays());
+        for (String string : listDays) {
+            if (string.matches(today)) {
                 // Log.e("BOOOLEAN","FOUND");
                 val = true;
                 indexTime = listDays.indexOf(string);
-                Log.e("index Value",String.valueOf(indexTime));
-
+                Log.e("index Value", String.valueOf(indexTime));
 
 
             }
@@ -428,6 +419,33 @@ public class ListViewAdapter extends ArrayAdapter<Class>  {
         }
 
         return val;
+    }
+
+    private void availBunks() {
+
+        int classesRequired = classes.getTotal() * 75 / 100;
+        if (classes.getCurrent() >= classesRequired) {
+            textViewAvail.setTextColor(Color.argb(255, 79, 196, 0));
+            String plural ;
+            if(classes.getCurrent() - classesRequired==1){
+                plural = "Bunk";
+            }else{
+                plural="Bunk";
+            }
+            textViewAvail.setText(classes.getCurrent() - classesRequired + " " +plural+ " Available");
+        } else {
+            textViewAvail.setTextColor(Color.RED);
+            String single;
+            if(classes.getCurrent() - classesRequired==1){
+                single = "Class";
+            }else{
+                single="Classes";
+            }
+            textViewAvail.setText(classesRequired - classes.getCurrent() + " "+ single+ " Short");
+
+        }
+
+
     }
 
     private String getDate() {
