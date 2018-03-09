@@ -73,8 +73,11 @@ public class CurrentAttendance extends AppCompatActivity {
         buttonMinusTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTextTotal.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) - 1));
-
+                if(Integer.parseInt(editTextTotal.getText().toString()) - 1<0){
+                    //Nothing
+                }else {
+                    editTextTotal.setText(String.valueOf(Integer.parseInt(editTextTotal.getText().toString()) - 1));
+                }
 
             }
         });
@@ -90,8 +93,11 @@ public class CurrentAttendance extends AppCompatActivity {
         buttonMinusCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextCurrent.getText().toString()) - 1));
-
+                if(Integer.parseInt(editTextCurrent.getText().toString()) - 1<0){
+                    //Nothing
+                }else {
+                    editTextCurrent.setText(String.valueOf(Integer.parseInt(editTextCurrent.getText().toString()) - 1));
+                }
 
             }
         });

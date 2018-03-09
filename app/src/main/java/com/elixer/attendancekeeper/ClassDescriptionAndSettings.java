@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -87,16 +88,26 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         buttonMinusTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edittextTotal.setText(String.valueOf(classes.getTotal() - 1));
+                if(classes.getTotal()-1<0){
+                    //Nothing
+                }
 
-                classes.setTotal(Integer.parseInt(edittextTotal.getText().toString()));
-                saveinsharedpref(classes);
-                //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
-                //startActivity(intentMainActivity);
-                //Update the Percentage
-                //Refresh for decoview
-                decoRefresh(view);
 
+              else if(classes.getTotal()-1 <classes.getCurrent()){
+                    Snackbar.make(view, "Current Attendance cannot be greater than Total Attendance", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }else {
+                    edittextTotal.setText(String.valueOf(classes.getTotal() - 1));
+
+                    classes.setTotal(Integer.parseInt(edittextTotal.getText().toString()));
+                    saveinsharedpref(classes);
+                    //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                    //startActivity(intentMainActivity);
+                    //Update the Percentage
+                    //Refresh for decoview
+                    decoRefresh(view);
+                }
 
             }
         });
@@ -104,15 +115,22 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         buttonAddCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edittextCurrent.setText(String.valueOf(classes.getCurrent() + 1));
-                classes.setCurrent(Integer.parseInt(edittextCurrent.getText().toString()));
 
-                saveinsharedpref(classes);
-                //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
-                //startActivity(intentMainActivity);
-                //Update the Percentage
-                //Refresh for decoview
-                decoRefresh(view);
+                if(classes.getCurrent() + 1>classes.getTotal()){
+                    Snackbar.make(view, "Current Attendance cannot be greater than Total Attendance", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }else {
+                    edittextCurrent.setText(String.valueOf(classes.getCurrent() + 1));
+                    classes.setCurrent(Integer.parseInt(edittextCurrent.getText().toString()));
+
+                    saveinsharedpref(classes);
+                    //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                    //startActivity(intentMainActivity);
+                    //Update the Percentage
+                    //Refresh for decoview
+                    decoRefresh(view);
+                }
 
 
             }
@@ -120,17 +138,20 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
         buttonMinusCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edittextCurrent.setText(String.valueOf(classes.getCurrent() - 1));
-                classes.setCurrent(Integer.parseInt(edittextCurrent.getText().toString()));
+                if(classes.getCurrent()-1<0){
+                    //Nothing
+                }else {
+                    edittextCurrent.setText(String.valueOf(classes.getCurrent() - 1));
+                    classes.setCurrent(Integer.parseInt(edittextCurrent.getText().toString()));
 
-                saveinsharedpref(classes);
-                //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
-                //startActivity(intentMainActivity);
-                //Update the Percentage
-                //Refresh for decoview
-                decoRefresh(view);
+                    saveinsharedpref(classes);
+                    //Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                    //startActivity(intentMainActivity);
+                    //Update the Percentage
+                    //Refresh for decoview
+                    decoRefresh(view);
 
-
+                }
             }
         });
         imageButtonDelete.setOnClickListener(new View.OnClickListener() {

@@ -13,13 +13,36 @@
     android:background="@color/backgroundgrey"
     android:padding="0dp">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:paddingBottom="0dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        android:id="@+id/imageButtonDelete"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_alignBottom="@+id/toolbar2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:padding="10dp"
-        android:layout_below="@+id/toolbar2">
+        android:layout_below="@+id/toolbar2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp">
 
         <TextView
             android:text="Name"
@@ -33,7 +56,8 @@
             android:textSize="30sp"
             android:fontFamily="monospace"
             android:layout_alignBottom="@+id/toolbar2"
-            android:paddingBottom="15dp" />
+            android:paddingBottom="25dp"
+            android:paddingTop="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -102,6 +126,7 @@
                         android:ems="10"
                         android:id="@+id/editTextTotal"
                         android:text="0"
+                        android:digits="0123456789"
                         android:textAlignment="center"
                         android:textColor="?android:attr/textColorTertiary"
                         android:layout_alignParentTop="true"
@@ -133,7 +158,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:text="Current Attandance"
+                    android:text="Current Attendance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView5"
@@ -141,25 +166,15 @@
                     android:textColor="?android:attr/textColorTertiary"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:paddingTop="10dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <EditText
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/editTextCurrent"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="?android:attr/textColorTertiary"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                    android:paddingBottom="10dp"
+                    android:layout_weight="0.31">
 
 
                     <android.support.design.widget.FloatingActionButton
@@ -169,9 +184,9 @@
                         app:fabSize="mini"
                         app:srcCompat="@drawable/plus"
                         android:id="@+id/buttonAddCurrent"
+                        app:backgroundTint="@color/colorAccentOpposite"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/editTextCurrent"
-                        app:backgroundTint="@color/colorAccentOpposite" />
+                        android:layout_toEndOf="@+id/editTextCurrent" />
 
                     <android.support.design.widget.FloatingActionButton
                         android:layout_width="wrap_content"
@@ -179,9 +194,22 @@
                         android:clickable="true"
                         app:fabSize="mini"
                         app:srcCompat="@drawable/minus"
-                        android:layout_alignParentTop="true"
-                        android:layout_toStartOf="@+id/editTextCurrent"
-                        android:id="@+id/buttonMinusCurrent" />
+                        android:id="@+id/buttonMinusCurrent"
+                        android:layout_alignTop="@+id/buttonAddCurrent"
+                        android:layout_toStartOf="@+id/editTextCurrent" />
+
+                    <EditText
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:id="@+id/editTextCurrent"
+                        android:text="0"
+                        android:digits="0123456789"
+                        android:textAlignment="center"
+                        android:textColor="?android:attr/textColorTertiary"
+                        android:layout_alignBottom="@+id/buttonAddCurrent"
+                        android:layout_centerHorizontal="true" />
 
 
                 </RelativeLayout>
@@ -200,7 +228,8 @@
                     android:layout_below="@+id/check_box_reminder"
                     android:layout_alignStart="@+id/check_box_reminder"
                     android:layout_alignEnd="@+id/check_box_reminder"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone" />
 
                 <CheckBox
                 android:text="Set Reminder for Class"
@@ -213,11 +242,12 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:id="@+id/check_box_reminder"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/relativeLayout2"
                 android:layout_centerHorizontal="true"
                 android:padding="0dp"
-                    android:layout_margin="0dp" />
+                    android:paddingTop="10dp"
+                    app:buttonTint="@color/colorAccent" />
 
             </LinearLayout>
 
@@ -226,25 +256,15 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
+    <TextView
+        android:text="Class Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_delete"
-        android:id="@+id/imageButtonDelete"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:layout_alignBottom="@+id/toolbar2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp" />
+        android:id="@+id/textView7"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

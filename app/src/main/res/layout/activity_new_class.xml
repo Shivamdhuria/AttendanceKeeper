@@ -23,6 +23,31 @@
         android:layout_marginTop="20dp"
         android:textSize="12sp" />
 
+    <TextView
+        android:text="Enter Class Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp" />
+
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_submit"
+        android:layout_below="@+id/editText_name"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,32 +59,9 @@
         android:textSize="24sp"
         android:hint="Science 101"
         android:inputType="textCapWords"
-        android:textColorHint="#B2AAB2"
+        android:textColorHint="?android:attr/textColorHintInverse"
+        android:layout_marginTop="21dp"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
         android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:text="Enter Class Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:fontFamily="sans-serif"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_submit"
-        android:layout_below="@+id/editText_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp" />
 </RelativeLayout>
