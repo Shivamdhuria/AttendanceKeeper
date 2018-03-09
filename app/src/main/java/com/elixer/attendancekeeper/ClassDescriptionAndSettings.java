@@ -297,6 +297,8 @@ public class ClassDescriptionAndSettings extends AppCompatActivity {
                     sharedPref.edit().remove(className).commit();
                     cancelReminder(className);
                     Intent intentMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                    //Clearing Stack
+                    intentMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intentMainActivity);
                 } catch (Exception er) {
                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();

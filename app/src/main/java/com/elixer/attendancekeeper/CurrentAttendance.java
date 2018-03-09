@@ -1,6 +1,8 @@
 package com.elixer.attendancekeeper;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -18,6 +21,7 @@ public class CurrentAttendance extends AppCompatActivity {
     FloatingActionButton buttonAddTotal,buttonMinusTotal,buttonAddCurrent,buttonMinusCurrent;
     EditText editTextTotal,editTextCurrent;
     Button buttonSubmit;
+    CheckBox checkReminder,checkAlarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,31 @@ public class CurrentAttendance extends AppCompatActivity {
         buttonMinusTotal = (FloatingActionButton) findViewById(R.id.buttonMinusTotal);
         buttonAddCurrent = (FloatingActionButton) findViewById(R.id.buttonAddCurrent);
         buttonMinusCurrent = (FloatingActionButton) findViewById(R.id.buttonMinusCurrent);
+        checkReminder = (CheckBox)findViewById(R.id.check_box_reminder);
+        checkAlarm=(CheckBox)findViewById(R.id.check_box_alarm);
+
+
+        checkAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkAlarm.isChecked() && checkReminder.isChecked()) {
+                    checkReminder.setChecked(false);
+                }
+
+            }
+        });
+        checkReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkAlarm.isChecked() && checkReminder.isChecked()) {
+                    checkAlarm.setChecked(false);
+                }
+                if(checkReminder.isChecked()){
+                    buildDialogBox();
+                }
+
+            }
+        });
 
         buttonAddTotal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +108,8 @@ public class CurrentAttendance extends AppCompatActivity {
 
                 else{
 
-
+                        NewClass.alarm=checkAlarm.isChecked();
+                        NewClass.reminder=checkReminder.isChecked();
                         int current = Integer.parseInt(editTextCurrent.getText().toString());
                         int total = Integer.parseInt(editTextTotal.getText().toString());
                        // DB snappydb = DBFactory.open(getApplicationContext(),"Attendance"); //create or open an existing database using the default name
@@ -99,11 +129,10 @@ public class CurrentAttendance extends AppCompatActivity {
                         editor.commit();
 
                     //ONLY IF NOT SET
-                    Intent intentSetDefault = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intentSetDefault);
-                    finish();
-
-
+                    Intent intentMainActivity = new Intent(getApplicationContext(),MainActivity.class);
+                    //Clearing Stack
+                    intentMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intentMainActivity);
 
 
 
@@ -115,5 +144,28 @@ public class CurrentAttendance extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    private void buildDialogBox() {
+
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Add the buttons
+        builder.setNeutralButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+                dialog.cancel();
+            }
+        });
+
+// 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage("Make sure Your Battery Manager isn't blocking the app from sending you notifications.Go to FAQ's for more information")
+                .setTitle("Notice");
+
+// 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

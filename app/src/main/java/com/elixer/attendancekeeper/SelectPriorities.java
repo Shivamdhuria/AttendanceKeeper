@@ -49,7 +49,7 @@ public class SelectPriorities extends AppCompatActivity {
                 //Set up a Dialog Box here
                 Intent intentCurrentAttendance = new Intent(getApplication(),CurrentAttendance.class);
                 startActivity(intentCurrentAttendance);
-                finish();
+
             }
         });
 

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     //the listview
     ListView listView;
     //For Current Date in Text View
-    TextView textViewCurrentDate;
+    TextView textViewCurrentDate,textViewEmpty;
     TextView textViewRemainingClasses;
     static int defaultTime,defaultPercentage;
 
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         listView = (ListView) findViewById(R.id.listview);
         textViewCurrentDate = (TextView) findViewById(R.id.textviewDate);
         textViewRemainingClasses=(TextView)findViewById(R.id.textViewRemainingClasses);
+        textViewEmpty=(TextView)findViewById(R.id.textViewEmpty);
         textViewRemainingClasses.setText("lol");
         findAndSaveDefaults();
 
@@ -129,8 +129,7 @@ public class MainActivity extends AppCompatActivity
                 Intent intentNewClass = new Intent(getApplication(),NewClass.class);
                 startActivity(intentNewClass);
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
             }
         });
 
@@ -304,6 +303,16 @@ public class MainActivity extends AppCompatActivity
         BeginService();
         //attaching adapter to the listview
         listView.setAdapter(adapter);
+
+
+        //Display Textview
+        if(adapter.getCount()==0){
+            textViewEmpty.setVisibility(View.VISIBLE);
+        }else{
+            textViewEmpty.setVisibility(View.GONE);
+        }
+
+
 
     }
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

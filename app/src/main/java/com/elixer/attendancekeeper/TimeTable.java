@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class TimeTable extends AppCompatActivity {
     ListView listViewTable;
     ListViewAdapterTimeTable adapterTime;
     String day;
+    TextView textViewEmpty;
    // TextView textViewDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class TimeTable extends AppCompatActivity {
         //Log.e(">.......",day);
          TextView textViewDateDisplay =(TextView)findViewById(R.id.textViewDateDisplay);
         listViewTable = (ListView)findViewById(R.id.listViewTable);
+        textViewEmpty=(TextView)findViewById(R.id.textViewEmpty);
 
 
 
@@ -89,6 +92,13 @@ public class TimeTable extends AppCompatActivity {
 
             //attaching adapter to the listview
             listViewTable.setAdapter(adapterTime);
+            //Show TextView if empth
+            if(adapterTime.getCount()==0){
+                textViewEmpty.setVisibility(View.VISIBLE);
+
+            }else {
+                textViewEmpty.setVisibility(View.GONE);
+            }
 
         }
     }

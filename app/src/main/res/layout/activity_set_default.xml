@@ -10,7 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.elixer.attendancekeeper.SetDefault"
-    android:background="@color/backgroundgrey">
+    android:background="@color/backgroundgrey"
+    android:padding="8dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -34,7 +35,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:paddingBottom="40dp"
+            android:paddingBottom="20dp"
             android:textStyle="normal|bold"
             android:paddingTop="20dp" />
 
@@ -70,7 +71,7 @@
             android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0.99">
+            android:layout_weight="0.81">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -149,7 +150,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="110dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="30dp">
 
@@ -190,15 +191,51 @@
 
                 </RelativeLayout>
 
-                <Button
-                    android:text="Save"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_save" />
+
 
             </LinearLayout>
 
         </RelativeLayout>
+
+
+        <CheckBox
+            android:text="Set Reminder for Class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textColor="?android:attr/textColorTertiary"
+            android:buttonTint="@android:color/white"
+            android:textSize="20sp"
+            android:id="@+id/check_box_reminder"
+
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="viewStart"
+            app:buttonTint="@color/colorAccent" />
+
+        <CheckBox
+            android:text="Set alarm for classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textColor="?android:attr/textColorTertiary"
+            android:buttonTint="@android:color/white"
+            android:textSize="20sp"
+            android:layout_weight="0.05"
+            android:id="@+id/check_box_alarm"
+
+            android:layout_centerHorizontal="true"
+
+            android:visibility="gone" />
+
+        <Button
+            android:text="Save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_save"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp" />
 
 
     </LinearLayout>

@@ -259,7 +259,7 @@ public class SelectTime extends AppCompatActivity {
                 }else{
 
 
-                    Intent intentSelectTime = new Intent(getApplication(), SelectPriorities.class);
+                    Intent intentSelectTime = new Intent(getApplication(), CurrentAttendance.class);
                     startActivity(intentSelectTime);
 
 
