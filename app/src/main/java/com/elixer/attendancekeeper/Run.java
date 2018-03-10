@@ -48,7 +48,7 @@ public class Run extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         // This describes what will happen when service is triggered
-        Log.e("Service Running","Run Running......");
+   //     Log.e("Service Running","Run Running......");
         fetchAllPreference();
 
 
@@ -77,8 +77,9 @@ public class Run extends IntentService {
         //Load the list into a hashSet
         List<String> listDays = new ArrayList<String>(classes.getDays());
         for (String string : listDays) {
+
             if (string.matches(today)) {
-                // Log.e("BOOOLEAN","FOUND");
+
                 val = true;
                 indexTime = listDays.indexOf(string);
               //  Log.e("index Value", String.valueOf(indexTime));
@@ -96,7 +97,7 @@ public class Run extends IntentService {
     private String getDate() {
 
 
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE");
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
             Date d = new Date();
             String dayOfTheWeek = sdf.format(d);
             Log.e("dayyyy",dayOfTheWeek);
@@ -121,18 +122,20 @@ public class Run extends IntentService {
           //  System.out.println("Username : " + classes.getName());
             String today=getDate();
             Boolean found =searchDay(classes,today);
+
             classList.add(classes);
          //   Log.e("BOOOLEAN",found.toString());
+
             if(found && classes.getStatus() && classes.isReminder()){
                 //Same day as Today,Set alarm here
-               // Log.e("Setting Alarm for class",classes.getName());
+
 
                 try {
                     // Log.e("classe time", classes.getDaysTime().toString());
                     List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
-                    Log.e("Alame name and time","Class at " + listDaysTime.get(indexTime) + " today!   :"+classes.getName());
+                   //Log.e("Alame name & time saved","Class at " + listDaysTime.get(indexTime) + " today!   :"+classes.getName());
                     setAlarm(classes.getName(),listDaysTime.get(indexTime));
-                    active.add(classes.getName());
+
 
 
 
@@ -144,11 +147,12 @@ public class Run extends IntentService {
 
 
         }
-        updateTextview(active.size());
+
 
 
     }
     private void setAlarm(String className,String times) {
+       // Log.e("Inside set alarm",className);
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         int hour=0,min=0;
         try {
@@ -163,13 +167,13 @@ public class Run extends IntentService {
         long currentTime = System.currentTimeMillis();
 
         calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, min);
+        calendar.set(Calendar.MINUTE, min-MainActivity.defaultTime);
         calendar.set(Calendar.SECOND, 0);
         long alarmTime = calendar.getTimeInMillis();
         if(alarmTime>currentTime) {//Set alarm if time is greater
             Intent notificationMessage = new Intent(this, NotificationPublisher.class);
             //Log.e("Setting Alarm.",".............");
-            Log.e("Setting alarm/Date.....", className + "    " + calendar.getTime().toString());
+            
 //This is alarm manager
             //  PendingIntent pendingIntent = PendingIntent.getService(getContext(), 0 , notificationMessage, PendingIntent.FLAG_UPDATE_CURRENT);
             //calendar.setTimeInMillis(time);
@@ -183,17 +187,11 @@ public class Run extends IntentService {
             alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         }else{
 
-            Log.d("TIME ", (String.valueOf( calendar.getTimeInMillis())+"   "+String.valueOf(calendar.getTimeInMillis())));
+            Log.d("TIME SET.........", (className+" time   "+String.valueOf( calendar.getTimeInMillis())));
 
         }
 
     }
 
-    void updateTextview(int size){
 
-        final String BROADCAST_ACTION = "Update";
-        Intent intent = new Intent(BROADCAST_ACTION);
-        intent.putExtra("size",size);
-        sendBroadcast(intent);
-    }
 }

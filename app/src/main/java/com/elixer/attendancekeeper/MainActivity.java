@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -49,7 +48,8 @@ public class MainActivity extends AppCompatActivity
     static int defaultTime,defaultPercentage;
 
     ListViewAdapter adapter;
-
+    String today;
+    int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +68,13 @@ public class MainActivity extends AppCompatActivity
         textViewCurrentDate = (TextView) findViewById(R.id.textviewDate);
         textViewRemainingClasses=(TextView)findViewById(R.id.textViewRemainingClasses);
         textViewEmpty=(TextView)findViewById(R.id.textViewEmpty);
-        textViewRemainingClasses.setText("lol");
+        today = getDay();
+        count =0;
+       // textViewRemainingClasses.setText("lol");
         findAndSaveDefaults();
 
 
-        registerReceiver(broadcastReceiver, new IntentFilter("Updating"));
+
 
         SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         //Try to fetch all values from shared preferene
         try{
             fetchAllPreference();
+            textViewRemainingClasses.setText(String.valueOf(count)+" Classes Today");
 
 
         }catch (Exception ex){
@@ -146,7 +149,7 @@ public class MainActivity extends AppCompatActivity
     private String convertToDay(Date dateClicked) {
 
         String dayOfTheWeek = (String) DateFormat.format("EEEE", dateClicked); // Thursd
-        Log.e("Date......",dayOfTheWeek);
+     //   Log.e("Date......",dayOfTheWeek);
         return dayOfTheWeek;
     }
 
@@ -207,7 +210,7 @@ public class MainActivity extends AppCompatActivity
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
         //Toast.makeText(this,"Daily set alarm",Toast.LENGTH_LONG).show();
-        Log.e("Alarm for service","Alarm Manager for Service at 0.05  " + calendar.get(Calendar.DAY_OF_WEEK));
+    //    Log.e("Alarm for service","Alarm Manager for Service at 0.05  " + calendar.get(Calendar.DAY_OF_WEEK));
     }
 
     @Override
@@ -245,6 +248,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -256,15 +260,9 @@ public class MainActivity extends AppCompatActivity
 
             Intent allClassIntent = new Intent(this,AllClass.class);
             startActivity(allClassIntent);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.faqs) {
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
@@ -289,6 +287,14 @@ public class MainActivity extends AppCompatActivity
 
             /** Print one variable to the console */
            // System.out.println("Username : " + classes.getName());
+            //Searching if today is class for setting tetview
+            if(searchClassTodayAndChecked(today,classes)){
+               count=count+1;
+
+            }
+
+
+
             classList.add(classes);
 
 
@@ -324,7 +330,35 @@ public class MainActivity extends AppCompatActivity
 
         }
     };
+    private Boolean searchClassTodayAndChecked(String today,Class classes) {
+        Boolean val = false;
 
+        //Load the list into a hashSet
+        List<String> listDays = new ArrayList<String>(classes.getDays());
+        for (String string : listDays) {
+            if (string.matches(today)&& classes.getStatus()) {
+                // Log.e("BOOOLEAN","FOUND");
+                val = true;
+
+
+
+            }
+
+
+            //Set<String> time = new HashSet<String>(classes.getDaysTime());
+        }
+
+        return val;
+    }
+
+    private String getDay() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        //  Log.e("dayyyy",dayOfTheWeek);
+        return dayOfTheWeek;
+    }
 
 
 

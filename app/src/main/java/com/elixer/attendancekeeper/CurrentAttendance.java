@@ -163,6 +163,8 @@ public class CurrentAttendance extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
                 dialog.cancel();
+                buttonSubmit.performClick();
+
             }
         });
 

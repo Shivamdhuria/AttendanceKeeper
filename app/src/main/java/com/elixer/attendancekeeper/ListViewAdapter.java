@@ -40,6 +40,8 @@ import static android.content.Context.ALARM_SERVICE;
 public class ListViewAdapter extends ArrayAdapter<Class> {
 
 
+//In your constructor
+
     //the list values in the List of type hero
     List<Class> classList;
 
@@ -59,6 +61,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
     View viewTitle;
     int indexTime;
     ArrayList<String> daysTime;
+    ArrayList<String> allActiveClasses;
 
     TextView textViewClassNumber;
     Button buttonPresent, buttonOff, buttonAbsent;
@@ -73,6 +76,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         this.context = context;
         this.resource = resource;
         this.classList = classList;
+
 
     }
 
@@ -220,6 +224,8 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             // viewTitle.setBackgroundColor(Color.parseColor("#FB5056"));
 
 
+
+
             try {
                 Log.e("classe time", classes.getDaysTime().toString());
                 List<String> listDaysTime = new ArrayList<String>(classes.getDaysTime());
@@ -346,6 +352,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
         // Update();
 
 
+
         return view;
     }
 
@@ -430,7 +437,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
             if(classes.getCurrent() - classesRequired==1){
                 plural = "Bunk";
             }else{
-                plural="Bunk";
+                plural="Bunks";
             }
             textViewAvail.setText(classes.getCurrent() - classesRequired + " " +plural+ " Available");
         } else {
@@ -472,6 +479,7 @@ public class ListViewAdapter extends ArrayAdapter<Class> {
        // textViewTotal.setText("/"+Integer.toString(classes.getTotal()));
         notifyDataSetChanged();
     }
+
 
 
 
