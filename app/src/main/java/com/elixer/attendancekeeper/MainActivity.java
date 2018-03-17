@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -73,29 +74,10 @@ public class MainActivity extends AppCompatActivity
        // textViewRemainingClasses.setText("lol");
         findAndSaveDefaults();
 
+        displayRemainingClasses();
 
 
 
-        SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPref.getString("class", "");
-        Log.e("json",json);
-        //Try to fetch all values from shared preferene
-        try{
-            fetchAllPreference();
-            textViewRemainingClasses.setText(String.valueOf(count)+" Classes Today");
-
-
-        }catch (Exception ex){
-
-
-        }
-        //Setting Date
-
-
-        
-        //Setting Current Date
-        textViewCurrentDate.setText(getDate());
 
         //On click Date button
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -144,6 +126,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void displayRemainingClasses() {
+        SharedPreferences sharedPref =getApplicationContext().getSharedPreferences("attend", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPref.getString("class", "");
+        Log.e("json",json);
+        //Try to fetch all values from shared preferene
+        try{
+            fetchAllPreference();
+            if(count==1){
+                textViewRemainingClasses.setText(String.valueOf(count) + " Class Today");
+            }else {
+                textViewRemainingClasses.setText(String.valueOf(count) + " Classes Today");
+            }
+
+
+        }catch (Exception ex){
+
+
+        }
+        //Setting Date
+
+
+
+        //Setting Current Date
+        textViewCurrentDate.setText(getDate());
     }
 
     private String convertToDay(Date dateClicked) {
@@ -262,9 +271,35 @@ public class MainActivity extends AppCompatActivity
             startActivity(allClassIntent);
         } else if (id == R.id.faqs) {
 
-        } else if (id == R.id.nav_share) {
+            Intent faqsIntent = new Intent(this,Faqs.class);
+            startActivity(faqsIntent);
 
+        } else if (id == R.id.nav_share) {
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Attendance Keeper App");
+                String sAux = "\nKeep tracl of your attendance\\n\n";
+                sAux = sAux + "https://play.google.com/store/apps/details?id=com.elixer.attendancekeeper \n\n";
+                i.putExtra(Intent.EXTRA_TEXT, sAux);
+                startActivity(Intent.createChooser(i, "Choose one"));
+            } catch (Exception e) {
+                //e.toString();
+            }
         }
+            else if(id == R.id.feedback){
+
+
+            String recepientEmail = "elixerapplications@gmail.com"; // either set to destination email or leave empty
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:" + recepientEmail));
+            intent. putExtra(Intent.EXTRA_SUBJECT, "Feedback regarding Attendance Keeper");
+            intent.putExtra(Intent.EXTRA_TEXT,"Hey There,");
+            startActivity(intent);
+
+            }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

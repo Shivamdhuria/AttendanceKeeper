@@ -169,7 +169,7 @@ public class CurrentAttendance extends AppCompatActivity {
         });
 
 // 2. Chain together various setter methods to set the dialog characteristics
-        builder.setMessage("Make sure Your Battery Manager isn't blocking the app from sending you notifications.Go to FAQ's for more information")
+        builder.setMessage("Make sure your battery manager isn't blocking the app from sending you notifications.Go to FAQ's for more information")
                 .setTitle("Notice");
 
 // 3. Get the AlertDialog from create()

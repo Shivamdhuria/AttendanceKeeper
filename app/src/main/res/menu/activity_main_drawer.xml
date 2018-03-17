@@ -10,6 +10,10 @@
             android:id="@+id/faqs"
             android:icon="@drawable/ic_info_black_24dp"
             android:title="FAQs" />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Feedback" />
 
     </group>
 
@@ -18,7 +22,8 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Invite" />
+                android:title="Share App" />
+
 
         </menu>
     </item>

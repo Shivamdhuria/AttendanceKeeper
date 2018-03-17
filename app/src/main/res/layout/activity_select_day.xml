@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_select_day"
     android:layout_width="match_parent"
@@ -34,16 +35,17 @@
             android:text="Monday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="70dp"
             android:id="@+id/checkbox_monday"
             android:checked="false"
             android:layout_alignParentTop="true"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
+
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:textSize="18sp"
-            android:layout_margin="5dp" />
+            android:textSize="24sp"
+            android:layout_margin="5dp"
+            android:buttonTint="@color/colorAccent" />
 
         <CheckBox
             android:text="Tuesday"
@@ -54,11 +56,12 @@
             android:checked="false"
             android:layout_alignParentTop="true"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
+
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:textSize="18sp"
-            android:layout_margin="5dp" />
+            android:textSize="24sp"
+            android:layout_margin="5dp"
+            android:buttonTint="@color/colorAccent"/>
 
         <CheckBox
             android:text="Wednesday"
@@ -69,25 +72,24 @@
             android:checked="false"
             android:layout_alignParentTop="true"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
+            android:buttonTint="@color/colorAccent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:layout_margin="5dp" />
 
         <CheckBox
             android:text="Thursday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
             android:id="@+id/checkbox_thursday"
             android:checked="false"
             android:layout_alignParentTop="true"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
+            android:buttonTint="@color/colorAccent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:layout_weight="0.05"
             android:layout_margin="5dp" />
 
@@ -98,8 +100,8 @@
             android:id="@+id/checkbox_friday"
             android:checked="false"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
-            android:textSize="18sp"
+            android:buttonTint="@color/colorAccent"
+            android:textSize="24sp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="17dp"
@@ -113,8 +115,8 @@
             android:id="@+id/checkbox_saturday"
             android:checked="false"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
-            android:textSize="18sp"
+            android:buttonTint="@color/colorAccent"
+            android:textSize="24sp"
             android:layout_marginStart="30dp"
             android:layout_below="@+id/checkbox_saturday"
             android:layout_alignParentStart="true"
@@ -128,8 +130,8 @@
             android:id="@+id/checkbox_sunday"
             android:checked="false"
             android:textColor="@android:color/white"
-            android:buttonTint="@android:color/white"
-            android:textSize="18sp"
+            android:buttonTint="@color/colorAccent"
+            android:textSize="24sp"
             android:layout_marginStart="30dp"
             android:layout_below="@+id/checkbox_saturday"
             android:layout_alignParentStart="true"
@@ -142,7 +144,9 @@
             android:id="@+id/button_submit"
             android:layout_margin="30dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/mybutton" />
     </LinearLayout>
 
 </RelativeLayout>

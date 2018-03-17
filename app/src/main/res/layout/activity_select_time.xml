@@ -245,7 +245,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
-        />
+        android:background="@drawable/mybutton"
+        android:textColor="@android:color/white" />
 
 
     <RelativeLayout

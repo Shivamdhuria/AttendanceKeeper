@@ -373,11 +373,11 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
     }
 
     private void availBunks() {
-        int classesRequired = classes.getTotal() * 75 / 100;
+        int classesRequired = classes.getTotal() * MainActivity.defaultPercentage / 100;
         if (classes.getCurrent() >= classesRequired) {
             textViewAvail.setTextColor(Color.argb(255, 79, 196, 0));
             String plural ;
-            if(classes.getCurrent() - classesRequired==1){
+            if(Math.abs(classes.getCurrent() - classesRequired)==1){
                 plural = "Bunk";
             }else{
                 plural="Bunks";
@@ -386,7 +386,7 @@ public class ListViewAdapterTimeTable extends ArrayAdapter <Class>{
         } else {
             textViewAvail.setTextColor(Color.RED);
             String single;
-            if(classes.getCurrent() - classesRequired==1){
+            if(Math.abs(classes.getCurrent() - classesRequired)==1){
                 single = "Class";
             }else{
                 single="Classes";

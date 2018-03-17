@@ -150,7 +150,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="30dp">
 
@@ -191,6 +191,18 @@
 
                 </RelativeLayout>
 
+                <Button
+                    android:text="Save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_save"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/mybutton"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
 
 
             </LinearLayout>
@@ -212,15 +224,6 @@
             android:layout_centerHorizontal="true"
 
             android:visibility="gone" />
-
-        <Button
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_save"
-
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp" />
 
 
     </LinearLayout>

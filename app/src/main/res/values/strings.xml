@@ -7,6 +7,19 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="faq_0">1) In some devices swiping off the App from recent Application may lead to force stop.Make sure
+        the app is running.</string>
+
+    <string name="faq_1">2) Follow these steps to disable Doze Mode:
+
+Open Settings, open the “Battery” section, and then tap into the overflow menu in the top righthand corner and select “Battery Optimization”
+Then, you will see a list of apps that are installed on the device.  In the menu at the top, make sure that “All Apps” is selected.
+Tap Attendance Keeper and select “Don’t optimize.” </string>
+
+
+
+
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

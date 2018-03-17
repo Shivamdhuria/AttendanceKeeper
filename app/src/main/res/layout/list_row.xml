@@ -130,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView10"
-        android:layout_toStartOf="@+id/relativeLayout4"
+
         android:id="@+id/textViewTime"
         android:layout_marginTop="3dp" />
 
