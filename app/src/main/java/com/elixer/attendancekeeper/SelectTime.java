@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -165,13 +166,13 @@ public class SelectTime extends AppCompatActivity {
         });
 
         button_submit.setOnClickListener(new View.OnClickListener() {
-            //Value of no error
-            Boolean noError = false;
+
 
             @Override
             public void onClick(View view) {
                 int count = 0;
-
+                //Value of no error
+                Boolean error = false;
                 for (int i = 0; i < 7; i++) {
                     //if default time is set
                     if (checkbox.isChecked()) {
@@ -193,6 +194,10 @@ public class SelectTime extends AppCompatActivity {
                                 if(searchIfEmpty(mondayTime.getText().toString())){
                                     count=count+1;
                                 }
+                                if(!timeCorrect(mondayTime.getText().toString())){
+                                    Log.e("SelectTime...","inside loop");
+                                    error=true;
+                                }
 
                             }
                             //For TUESDAY
@@ -200,6 +205,9 @@ public class SelectTime extends AppCompatActivity {
                                 daysTime.set(i, tuesdayTime.getText().toString());
                                 if(searchIfEmpty(tuesdayTime.getText().toString())){
                                     count=count+1;
+                                }
+                                if(!timeCorrect(tuesdayTime.getText().toString())){
+                                    error=true;
                                 }
 
                             }
@@ -211,6 +219,9 @@ public class SelectTime extends AppCompatActivity {
                                 if(searchIfEmpty(wednesdayTime.getText().toString())){
                                     count=count+1;
                                 }
+                                if(!timeCorrect(wednesdayTime.getText().toString())){
+                                    error=true;
+                                }
 
                             }
 
@@ -219,6 +230,9 @@ public class SelectTime extends AppCompatActivity {
                                 daysTime.set(i, thursdayTime.getText().toString());
                                 if(searchIfEmpty(thursdayTime.getText().toString())){
                                     count=count+1;
+                                }
+                                if(!timeCorrect(thursdayTime.getText().toString())){
+                                    error=true;
                                 }
 
                             }
@@ -229,6 +243,9 @@ public class SelectTime extends AppCompatActivity {
                                 if(searchIfEmpty(fridayTime.getText().toString())){
                                     count=count+1;
                                 }
+                                if(!timeCorrect(fridayTime.getText().toString())){
+                                    error=true;
+                                }
 
                             }
 
@@ -238,6 +255,9 @@ public class SelectTime extends AppCompatActivity {
                                 if(searchIfEmpty(saturdayTime.getText().toString())){
                                     count=count+1;
                                 }
+                               if(!timeCorrect(saturdayTime.getText().toString())){
+                                    error=true;
+                                }
 
                             }
 
@@ -246,6 +266,9 @@ public class SelectTime extends AppCompatActivity {
                                 daysTime.set(i, sundayTime.getText().toString());
                                 if(searchIfEmpty(sundayTime.getText().toString())){
                                     count=count+1;
+                                }
+                                if(!timeCorrect(sundayTime.getText().toString())){
+                                    error=true;
                                 }
 
                             }
@@ -261,10 +284,15 @@ public class SelectTime extends AppCompatActivity {
 
 
                 }
-
+                Log.e("SelectTime..errror.",error.toString());
 
                 if(count>0) {
                     Snackbar.make(view, "Time field empty", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+
+                }else if(error){
+                    Snackbar.make(view, "Enter in 24 hour time format", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
 
@@ -290,4 +318,26 @@ public class SelectTime extends AppCompatActivity {
 
 
         }
+    public boolean timeCorrect(String times){
+
+
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        int hour=0,min=0;
+        Boolean timeCorrect= false;
+        try {
+
+            String[] time = times.split ( ":" );
+            hour = Integer.parseInt ( time[0].trim() );
+            min = Integer.parseInt ( time[1].trim() );
+            Log.e("SelectTime....",String.valueOf(hour)+" "+String.valueOf(min));
+            if(hour >=00 && hour <=24 && min>=00 && min<=60) {
+                timeCorrect = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        Log.e("SelectTime.",timeCorrect.toString());
+        return timeCorrect;
+    }
 }

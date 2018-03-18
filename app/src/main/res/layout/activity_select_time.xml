@@ -75,7 +75,7 @@
             android:textAlignment="center"
             android:textSize="24sp"
             android:textColor="@android:color/white"
-            android:hint="8.00" />
+            android:hint="8:00" />
 
         <TextView
             android:text="Monday"
@@ -101,7 +101,7 @@
             android:textAlignment="center"
             android:textSize="24sp"
             android:textColor="@android:color/white"
-            android:hint="9.00" />
+            android:hint="8:00" />
 
         <TextView
             android:text="Tuesday"

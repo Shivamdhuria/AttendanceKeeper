@@ -140,7 +140,7 @@
                 android:checked="false"
                 android:textColor="@android:color/white"
                 android:buttonTint="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:layout_weight="0.05"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
