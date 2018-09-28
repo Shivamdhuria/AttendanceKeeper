@@ -7,11 +7,15 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -34,8 +38,12 @@ public class NotificationPublisher extends BroadcastReceiver {
         Notification.Builder builder;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+            // play vibration
+            Vibrator vibrator = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(VibrationEffect.createWaveform(new long[] { 0,1000,1000, 1000, 1000 }, -1));
+
             String id = "w01", name = "Class Reminder";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_MAX;
             String desc = "Mark your Attendance";
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -49,9 +57,19 @@ public class NotificationPublisher extends BroadcastReceiver {
             builder = new Notification.Builder(context, id);
 
             // builder = new Notification.Builder(context);
+            builder.setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                            R.mipmap.ic_launcher));
             builder.setAutoCancel(false);
             builder.setContentTitle("Class Reminder");
             builder.setContentText("Mark your Attendance");
+            //Setting sound
+            Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/raw/bells");
+            builder.setSound(sound);
+            //Pending intent
+            Intent myIntent = new Intent(context, MainActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(context, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(contentIntent);
 
 
 
@@ -62,6 +80,8 @@ public class NotificationPublisher extends BroadcastReceiver {
             notificationManager.notify(0, notification);
 
         }
+
+
         else{
 
             Intent myIntent = new Intent(context, MainActivity.class);
@@ -70,12 +90,16 @@ public class NotificationPublisher extends BroadcastReceiver {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
+                            .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                                    R.mipmap.ic_launcher))
                             .setContentTitle("Class Reminder")
                             .setContentText("Mark Your Attendance")
                             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                             .setVibrate(new long[] { 0,1000,1000, 1000, 1000 })
                             .setLights(Color.YELLOW, 3000, 3000);
             mBuilder.setContentIntent(contentIntent);
+            Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/raw/bells");
+            mBuilder.setSound(sound);
             mBuilder.setDefaults(Notification.DEFAULT_SOUND);
             mBuilder.setAutoCancel(true);
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

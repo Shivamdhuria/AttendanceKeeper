@@ -34,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Keep count of your attendance in an easy and interactive way"
+            android:text="Keep count of your attendance in an easy and interactive way."
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />

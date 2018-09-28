@@ -284,7 +284,9 @@ public class SelectTime extends AppCompatActivity {
 
 
                 }
-                Log.e("SelectTime..errror.",error.toString());
+                if(checkbox.isChecked() && !timeCorrect(defaultTime.getText().toString())){
+                    error=true;
+                }
 
                 if(count>0) {
                     Snackbar.make(view, "Time field empty", Snackbar.LENGTH_LONG)
